@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_card.xml" value="0.1765625" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_constraint_layout.xml" value="0.1765625" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_material_text_view.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_material_text_view_grey.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/gradient_constraint_layout.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/gradient_material_button.xml" value="0.4" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/ic_baseline_delete_24dp_white.xml" value="0.20625" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/text_input_layour_border_color.xml" value="0.1" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_devices_manager.xml" value="0.264" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_heaters.xml" value="0.264" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_lights.xml" value="0.264" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_list_devices.xml" value="0.14486711829077645" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_roller_shutters.xml" value="0.264" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_user_profile.xml" value="0.4" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device.xml" value="0.264" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device_details.xml" value="0.4" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/menu/menu_fragment_list_devices.xml" value="0.1" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/menu/menu_fragment_user_profile.xml" value="0.18229166666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

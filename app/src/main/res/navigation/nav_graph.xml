@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/frg_list_devices">
+
+    <fragment
+        android:id="@+id/frg_list_devices"
+        android:name="com.homeautomationapp.ui.fragments.ListDevicesFragment"
+        android:label="@string/frg_list_devices_label"
+        tools:layout="@layout/fragment_list_devices">
+
+        <action
+            android:id="@+id/action_frg_list_devices_to_frg_lights"
+            app:destination="@id/frg_lights"/>
+
+        <action
+            android:id="@+id/action_frg_list_devices_to_frg_heaters"
+            app:destination="@id/frg_heaters"/>
+
+        <action
+            android:id="@+id/action_frg_list_devices_to_frg_roller_shutters"
+            app:destination="@id/frg_roller_shutters"/>
+
+        <action
+            android:id="@+id/action_frg_list_devices_to_frg_user_profile"
+            app:destination="@id/frg_user_profile"/>
+
+        <action
+            android:id="@+id/action_frg_list_devices_to_frg_devices_manager"
+            app:destination="@id/frg_devices_manager"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/frg_lights"
+        android:name="com.homeautomationapp.ui.fragments.LightsFragment"
+        android:label="@string/frg_lights_label"
+        tools:layout="@layout/fragment_lights"/>
+
+    <fragment
+        android:id="@+id/frg_heaters"
+        android:name="com.homeautomationapp.ui.fragments.HeatersFragment"
+        android:label="@string/frg_heaters_label"
+        tools:layout="@layout/fragment_heaters"/>
+
+    <fragment
+        android:id="@+id/frg_roller_shutters"
+        android:name="com.homeautomationapp.ui.fragments.RollerShuttersFragment"
+        android:label="@string/frg_heaters_label"
+        tools:layout="@layout/fragment_roller_shutters"/>
+
+    <fragment
+        android:id="@+id/frg_user_profile"
+        android:name="com.homeautomationapp.ui.fragments.UserProfileFragment"
+        android:label="@string/frg_user_profile_label"
+        tools:layout="@layout/fragment_user_profile"/>
+
+    <fragment
+        android:id="@+id/frg_devices_manager"
+        android:name="com.homeautomationapp.ui.fragments.DevicesManagerFragment"
+        android:label="@string/frg_devices_manager"
+        tools:layout="@layout/fragment_devices_manager"/>
+</navigation>

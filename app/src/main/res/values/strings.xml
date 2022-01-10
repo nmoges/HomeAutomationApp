@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">HomeAutomationApp</string>
+
+    <!-- DIALOGS -->
+    <!-- DialogCancellation.kt -->
+    <string name="title_dialog_cancellation">Cancel</string>
+    <string name="message_dialog_cancellation">Modifications will be cancelled. Confirm ?</string>
+
+    <!-- DialogDelete.kt -->
+    <string name="title_dialog_delete">Delete device</string>
+    <string name="message_dialog_delete">This device will be deleted. Confirm ?</string>
+
+    <!-- DialogFilter.kt -->
+    <string name="title_dialog_filter">Select types of device</string>
+
+    <!-- DialogReset.kt -->
+    <string name="title_dialog_reset">Reset</string>
+    <string name="message_dialog_reset">All fields will be cleared. Confirm ?</string>
+
+    <!-- DialogReset.kt / DialogCancellation.kt -->
+    <string name="btn_yes_dialog">Yes</string>
+    <string name="btn_no_dialog">No</string>
+    <string name="btn_confirm_dialog">Confirm</string>
+    <string name="btn_cancel_dialog">Cancel</string>
+
+
+    <!-- FRAGMENTS -->
+    <!-- DevicesManagerFragment.kt -->
+    <string name="name_toolbar_frg_devices_manager">Manage devices</string>
+
+    <!-- FragmentUI.kt -->
+    <string name="toast_modifications_applied">Modifications applied</string>
+
+    <!-- HeatersFragment.kt -->
+    <string name="name_toolbar_frg_heaters">Heaters</string>
+
+    <!-- LightsFragment.kt -->
+    <string name="name_toolbar_frg_lights">Lights</string>
+
+    <!-- ListDevicesFragment.kt -->
+    <string name="name_toolbar_frg_list_devices">List of devices</string>
+
+    <!-- RollerShuttersFragment.kt -->
+    <string name="name_toolbar_frg_roller_shutters">Roller Shutter</string>
+
+    <!-- UserProfileFragment.kt -->
+    <string name="name_toolbar_frg_user_profile">Profile</string>
+    <string name="toast_confirmation">Modifications saved</string>
+    <string name="error_text_input_empty">Empty</string>
+    <string name="error_text_input_invalid_format">Invalid format</string>
+    <string name="error_toast_message">Update failed. Information missing.</string>
+
+
+    <!-- FRAGMENT LAYOUTS -->
+    <!-- fragment_heaters.xml -->
+    <string name="button_save">Save</string>
+    <string name="status_device">Status:</string>
+    <string name="min_temp_heater">min : 7°C</string>
+    <string name="max_temp_heater">max : 28°C</string>
+    <string name="current_temp_heater">%1$d °C</string>
+
+    <!-- fragment_lights.xml -->
+    <string name="min_luminosity">min : 0</string>
+    <string name="max_luminosity">max : 100</string>
+    <string name="current_luminosity">0</string>
+
+    <!-- fragment_roller_shutters.xml -->
+    <string name="min_roller_shutter">min : 0</string>
+    <string name="max_roller_shutter">max : 100</string>
+    <string name="current_roller_shutter">0</string>
+
+    <!-- fragment_user_profile.xml -->
+    <string name="hint_edit_first_name">First name</string>
+    <string name="hint_edit_last_name">Last name</string>
+    <string name="hint_edit_email_name">Email</string>
+    <string name="hint_edit_address_name">Address</string>
+    <string name="button_confirm_profile">Confirm</string>
+
+
+    <!-- MENU -->
+    <!-- menu_fragment_list_devices.xml -->
+    <string name="menu_item_user_profile">Profile</string>
+    <string name="menu_item_filter">Filter</string>
+    <string name="menu_item_manage_devices">Manage devices</string>
+
+    <!-- menu_fragment_user_profile.xml -->
+    <string name="menu_item_clear">Clear fields</string>
+
+
+    <!-- NAVIGATION -->
+    <!-- nav_graph.xml -->
+    <string name="frg_list_devices_label">ListDevicesFragment</string>
+    <string name="frg_lights_label">LightsFragment</string>
+    <string name="frg_heaters_label">HeatersFragment</string>
+    <string name="frg_roller_shutters_label">RollerShuttersFragment</string>
+    <string name="frg_user_profile_label">UserProfileFragment</string>
+    <string name="frg_devices_manager">DevicesManagerFragment</string>
+
+</resources>
