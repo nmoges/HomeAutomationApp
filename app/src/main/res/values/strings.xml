@@ -72,8 +72,14 @@
     <!-- fragment_user_profile.xml -->
     <string name="hint_edit_first_name">First name</string>
     <string name="hint_edit_last_name">Last name</string>
-    <string name="hint_edit_email_name">Email</string>
-    <string name="hint_edit_address_name">Address</string>
+    <string name="hint_edit_birthdate">Birthdate</string>
+    <string name="hint_edit_email">Email</string>
+    <string name="hint_edit_phone">Phone</string>
+    <string name="hint_edit_street_number">Street number</string>
+    <string name="hint_edit_street_name">Street name</string>
+    <string name="hint_edit_postal_code">Postal code</string>
+    <string name="hint_edit_city">City</string>
+    <string name="hint_edit_address">Address</string>
     <string name="button_confirm_profile">Confirm</string>
 
 

@@ -6,11 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentLightsBinding
 import com.homeautomationapp.ui.activities.MainActivity
-import com.homeautomationapp.ui.dialogs.DialogCancellation
 
 class LightsFragment : Fragment(), FragmentUI {
 
@@ -39,7 +37,8 @@ class LightsFragment : Fragment(), FragmentUI {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) displayCancellationDialog()
+        if (item.itemId == android.R.id.home) displayCancellationDialog((activity as MainActivity),
+                                                                        parentFragmentManager)
         return super.onOptionsItemSelected(item)
     }
 
@@ -53,12 +52,12 @@ class LightsFragment : Fragment(), FragmentUI {
 
     private fun handleSliderListener() {
         binding.slider.addOnChangeListener { _, value, _ ->
-            updateMaterialTextViewSelectedValue(value.toInt().toString())
+            updateMaterialTextViewSelectedLuminosity(value.toInt().toString())
         }
     }
 
-    override fun updateMaterialTextViewSelectedValue(selectedValue: String) {
-        binding.currentLuminosity.text = selectedValue
+    private fun updateMaterialTextViewSelectedLuminosity(luminosity: String) {
+        binding.currentLuminosity.text = luminosity
     }
 
     private fun initializeSlider() {
@@ -74,11 +73,5 @@ class LightsFragment : Fragment(), FragmentUI {
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
-    }
-
-    fun displayCancellationDialog() {
-        DialogCancellation {
-            (activity as MainActivity).removeFragmentFromBackStack()
-        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_CANCELLATION)
     }
 }

@@ -6,11 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentHeatersBinding
 import com.homeautomationapp.ui.activities.MainActivity
-import com.homeautomationapp.ui.dialogs.DialogCancellation
 
 class HeatersFragment : Fragment(), FragmentUI {
 
@@ -39,7 +37,8 @@ class HeatersFragment : Fragment(), FragmentUI {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) displayCancellationDialog()
+        if (item.itemId == android.R.id.home) displayCancellationDialog((activity as MainActivity),
+                                                                        parentFragmentManager)
         return super.onOptionsItemSelected(item)
     }
 
@@ -54,12 +53,12 @@ class HeatersFragment : Fragment(), FragmentUI {
     private fun handleSliderListener() {
         binding.slider.addOnChangeListener { _, value, _ ->
             val temperature = getString(R.string.current_temp_heater, value.toInt())
-            updateMaterialTextViewSelectedValue(temperature)
+            updateMaterialTextViewSelectedTemperature(temperature)
         }
     }
 
-    override fun updateMaterialTextViewSelectedValue(selectedValue: String) {
-        binding.currentTempHeater.text = selectedValue
+    private fun updateMaterialTextViewSelectedTemperature(temperature: String) {
+        binding.currentTempHeater.text = temperature
     }
 
     private fun initializeSlider() {
@@ -75,11 +74,5 @@ class HeatersFragment : Fragment(), FragmentUI {
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
-    }
-
-    fun displayCancellationDialog() {
-        DialogCancellation {
-            (activity as MainActivity).removeFragmentFromBackStack()
-        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_CANCELLATION)
     }
 }

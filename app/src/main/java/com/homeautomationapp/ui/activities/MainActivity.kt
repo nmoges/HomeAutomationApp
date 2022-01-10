@@ -84,25 +84,29 @@ class MainActivity : AppCompatActivity() {
                 resources.getString(R.string.frg_user_profile_label) -> {
                     supportFragmentManager.primaryNavigationFragment
                                           ?.childFragmentManager?.fragments?.get(0)?.let {
-                        (it as UserProfileFragment).displayCancellationDialog()
+                        (it as UserProfileFragment).displayCancellationDialog(this,
+                                                                              supportFragmentManager)
                     }
                 }
                 resources.getString(R.string.frg_lights_label) -> {
                     supportFragmentManager.primaryNavigationFragment
                                           ?.childFragmentManager?.fragments?.get(0)?.let {
-                        (it as LightsFragment).displayCancellationDialog()
+                        (it as LightsFragment).displayCancellationDialog(this,
+                                                                         supportFragmentManager)
                     }
                 }
                 resources.getString(R.string.frg_roller_shutters_label) -> {
                     supportFragmentManager.primaryNavigationFragment
                                           ?.childFragmentManager?.fragments?.get(0)?.let {
-                        (it as RollerShuttersFragment).displayCancellationDialog()
+                        (it as RollerShuttersFragment).displayCancellationDialog(this,
+                                                                                 supportFragmentManager)
                     }
                 }
                 resources.getString(R.string.frg_heaters_label) -> {
                     supportFragmentManager.primaryNavigationFragment
                                           ?.childFragmentManager?.fragments?.get(0)?.let {
-                        (it as HeatersFragment).displayCancellationDialog()
+                        (it as HeatersFragment).displayCancellationDialog(this,
+                                                                          supportFragmentManager)
                     }
                 }
                 else -> {
