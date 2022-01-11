@@ -79,7 +79,7 @@
     <string name="hint_edit_street_name">Street name</string>
     <string name="hint_edit_postal_code">Postal code</string>
     <string name="hint_edit_city">City</string>
-    <string name="hint_edit_address">Address</string>
+    <string name="hint_edit_country">Country</string>
     <string name="button_confirm_profile">Confirm</string>
 
 

@@ -107,13 +107,13 @@ class UserProfileFragment : Fragment(), FragmentUI {
             it.textInputEditCity.text?.clear()
             if (it.textInputEditFirstName.isFocused) it.textInputEditFirstName.clearFocus()
             if (it.textInputEditLastName.isFocused) it.textInputEditLastName.clearFocus()
-            if (it.textInputEditBirthdate.isFocused) it.textInputEditBirthdate.clearFocus()
             if (it.textInputEditEmail.isFocused) it.textInputEditEmail.clearFocus()
             if (it.textInputEditPhone.isFocused) it.textInputEditPhone.clearFocus()
             if (it.textInputEditStreetNumber.isFocused) it.textInputEditStreetNumber.clearFocus()
             if (it.textInputEditStreetName.isFocused) it.textInputEditStreetName.clearFocus()
             if (it.textInputEditPostalCode.isFocused) it.textInputEditPostalCode.clearFocus()
             if (it.textInputEditCity.isFocused) it.textInputEditCity.clearFocus()
+            if (it.textInputEditCountry.isFocused) it.textInputEditCountry.clearFocus()
         }
     }
 
@@ -129,7 +129,8 @@ class UserProfileFragment : Fragment(), FragmentUI {
             checkTextInputEditField("street_name", it.textInputEditStreetName, it.textInputLayoutStreetName)
             checkTextInputEditField("postal_code", it.textInputEditPostalCode, it.textInputLayoutPostalCode)
             checkTextInputEditField("city", it.textInputEditCity, it.textInputLayoutCity)
-            
+            checkTextInputEditField("country", it.textInputEditCountry, it.textInputLayoutCountry)
+
             error = it.textInputLayoutFirstName.isErrorEnabled
                     || it.textInputLayoutLastName.isErrorEnabled
                     || it.textInputLayoutBirthdate.isErrorEnabled
@@ -139,6 +140,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
                     || it.textInputLayoutStreetName.isErrorEnabled
                     || it.textInputLayoutPostalCode.isErrorEnabled
                     || it.textInputLayoutCity.isErrorEnabled
+                    || it.textInputLayoutCountry.isErrorEnabled
         }
         return error
     }
@@ -187,6 +189,8 @@ class UserProfileFragment : Fragment(), FragmentUI {
                 { type -> clearTextInputEditErrorStatus(type) })
             it.textInputEditCity.addTextChangedListener(ProfileTextWatcher("city")
                 { type -> clearTextInputEditErrorStatus(type) })
+            it.textInputEditCountry.addTextChangedListener(ProfileTextWatcher("country")
+                { type -> clearTextInputEditErrorStatus(type) })
         }
     }
 
@@ -202,6 +206,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
                 "street_name" -> { it.textInputLayoutStreetName.isErrorEnabled = false }
                 "postal_code" -> { it.textInputLayoutPostalCode.isErrorEnabled = false }
                 "city" -> { it.textInputLayoutCity.isErrorEnabled = false }
+                "country" -> { it.textInputLayoutCountry.isErrorEnabled = false}
             }
         }
     }
@@ -216,6 +221,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
         clearTextInputEditErrorStatus("street_name")
         clearTextInputEditErrorStatus("postal_code")
         clearTextInputEditErrorStatus("city")
+        clearTextInputEditErrorStatus("country")
     }
 
     private fun displayErrorToastMessage() {

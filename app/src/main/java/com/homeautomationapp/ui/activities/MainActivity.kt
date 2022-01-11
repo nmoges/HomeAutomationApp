@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.homeautomationapp.AppConstants
@@ -13,7 +14,13 @@ import com.homeautomationapp.ui.fragments.HeatersFragment
 import com.homeautomationapp.ui.fragments.LightsFragment
 import com.homeautomationapp.ui.fragments.RollerShuttersFragment
 import com.homeautomationapp.ui.fragments.UserProfileFragment
+import com.homeautomationapp.viewmodels.ViewModelData
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Application main activity.
+ */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -22,18 +29,26 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navHostFragment: NavHostFragment
 
+    lateinit var viewModel: ViewModelData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initializeToolbar()
         initializeNavigation()
+        initializeViewModel()
+        viewModel.initializeDB(applicationContext)
     }
 
     private fun initializeNavigation() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_frg)
                           as NavHostFragment
         navController = navHostFragment.navController
+    }
+
+    private fun initializeViewModel() {
+        viewModel = ViewModelProvider(this)[ViewModelData::class.java]
     }
 
     @Suppress("DEPRECATION")
