@@ -1,6 +1,7 @@
 package com.homeautomationapp.viewmodels
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,6 +34,12 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
     private fun getListOfDevices() {
         viewModelScope.launch {
             devicesLiveData.postValue(repository.getAllDevices())
+        }
+    }
+
+    fun getUser() {
+        viewModelScope.launch {
+            userLiveData.postValue(repository.getUser())
         }
     }
 }

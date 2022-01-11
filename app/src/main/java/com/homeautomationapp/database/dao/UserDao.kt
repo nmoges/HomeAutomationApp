@@ -15,6 +15,6 @@ interface UserDao {
     @Update
     suspend fun updateUserData(userEntity: UserEntity)
 
-    @Query("SELECT * FROM user WHERE id = 0")
+    @Query("SELECT * FROM user WHERE id = 1")
     suspend fun getUserData(): UserEntity
 }

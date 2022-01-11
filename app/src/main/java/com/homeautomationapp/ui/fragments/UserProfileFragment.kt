@@ -2,6 +2,7 @@ package com.homeautomationapp.ui.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentUserProfileBinding
+import com.homeautomationapp.model.User
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.dialogs.DialogReset
 import com.homeautomationapp.utils.DateFormatter
@@ -19,6 +21,8 @@ import java.util.*
 class UserProfileFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentUserProfileBinding
+
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,9 @@ class UserProfileFragment : Fragment(), FragmentUI {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment()
+        initializeTextInputEditFields()
+        (activity as MainActivity).viewModel.getUser()
+        initializeTextInputEditFields()
         handleTextInputEditListeners()
         handleConfirmationButton()
         binding.textInputEditBirthdate.setOnClickListener {
@@ -49,6 +56,24 @@ class UserProfileFragment : Fragment(), FragmentUI {
         (activity as MainActivity)
             .setToolbarProperties(resources.getString(R.string.name_toolbar_frg_user_profile),
                      true)
+    }
+
+    private fun initializeTextInputEditFields() {
+        (activity as MainActivity).viewModel.userLiveData.observe(viewLifecycleOwner, {
+            user = it
+            binding.apply {
+                textInputEditFirstName.setText(user.firstName)
+                textInputEditLastName.setText(user.lastName)
+                textInputEditBirthdate.setText(user.birthdate)
+                textInputEditEmail.setText(user.email)
+                textInputEditPhone.setText(user.phone)
+                textInputEditStreetNumber.setText(user.address.streetNumber)
+                textInputEditStreetName.setText(user.address.streetName)
+                textInputEditPostalCode.setText(user.address.postalCode.toString())
+                textInputEditCity.setText(user.address.city)
+                textInputEditCountry.setText(user.address.country)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
