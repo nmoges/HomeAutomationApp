@@ -130,6 +130,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
             it.textInputEditStreetName.text?.clear()
             it.textInputEditPostalCode.text?.clear()
             it.textInputEditCity.text?.clear()
+            it.textInputEditCountry.text?.clear()
             if (it.textInputEditFirstName.isFocused) it.textInputEditFirstName.clearFocus()
             if (it.textInputEditLastName.isFocused) it.textInputEditLastName.clearFocus()
             if (it.textInputEditEmail.isFocused) it.textInputEditEmail.clearFocus()

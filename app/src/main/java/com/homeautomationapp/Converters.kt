@@ -9,6 +9,7 @@ import com.homeautomationapp.service.RawDevice
 import com.homeautomationapp.service.RawUser
 
 fun DeviceEntity.toHeater() = Device.Heater(
+    id = this.id,
     deviceName = this.name,
     productType = this.productType,
     temperature = this.temperature,
@@ -16,6 +17,7 @@ fun DeviceEntity.toHeater() = Device.Heater(
 )
 
 fun DeviceEntity.toLight() = Device.Light(
+    id = this.id,
     deviceName = this.name,
     productType = this.productType,
     luminosity = this.intensity,
@@ -23,12 +25,14 @@ fun DeviceEntity.toLight() = Device.Light(
 )
 
 fun DeviceEntity.toShutterRoller() = Device.RollerShutter(
+    id = this.id,
     deviceName = this.name,
     productType = this.productType,
     position = this.position
 )
 
 fun Device.Heater.toDeviceEntity() = DeviceEntity(
+    id = this.id,
     name = this.deviceName,
     intensity = null,
     mode = this.mode,
@@ -38,6 +42,7 @@ fun Device.Heater.toDeviceEntity() = DeviceEntity(
 )
 
 fun Device.Light.toDeviceEntity() = DeviceEntity(
+    id = this.id,
     name = this.deviceName,
     intensity = this.luminosity,
     mode = this.mode,
@@ -47,6 +52,7 @@ fun Device.Light.toDeviceEntity() = DeviceEntity(
 )
 
 fun Device.RollerShutter.toDeviceEntity() = DeviceEntity(
+    id = this.id,
     name = this.deviceName,
     intensity = null,
     mode = null,
@@ -56,7 +62,7 @@ fun Device.RollerShutter.toDeviceEntity() = DeviceEntity(
 )
 
 fun UserEntity.toUser(): User {
-    val address: Address = Address(
+    val address = Address(
         streetName = this.streetName,
         streetNumber = this.streetNumber,
         postalCode = this.postalCode,

@@ -84,6 +84,7 @@ class LightsFragment : Fragment(), FragmentUI {
 
     private fun handleSaveButtonListener() {
         binding.button.setOnClickListener {
+            saveNewLightValues()
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
@@ -91,5 +92,13 @@ class LightsFragment : Fragment(), FragmentUI {
 
     private fun getSelectedLightDevice() {
         light = (activity as MainActivity).viewModel.selectedDevice as Device.Light
+    }
+
+    private fun saveNewLightValues() {
+        light.apply {
+            mode = if (binding.switchStatus.isChecked) "ON" else "OFF"
+            luminosity = binding.slider.values[0].toInt()
+        }
+        (activity as MainActivity).viewModel.updateDevice(light)
     }
 }

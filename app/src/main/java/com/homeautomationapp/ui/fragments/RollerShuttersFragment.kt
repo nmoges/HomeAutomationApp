@@ -70,6 +70,7 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
 
     private fun handleSaveButtonListener() {
         binding.button.setOnClickListener {
+            saveNewRollerShutterValues()
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
@@ -77,5 +78,12 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
 
     private fun getSelectedRollerShutterDevice() {
         rollerShutter = (activity as MainActivity).viewModel.selectedDevice as Device.RollerShutter
+    }
+
+    private fun saveNewRollerShutterValues() {
+        rollerShutter.apply {
+            position = binding.slider.values[0].toInt()
+        }
+        (activity as MainActivity).viewModel.updateDevice(rollerShutter)
     }
 }

@@ -48,4 +48,10 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
             repository.updateUserData(user)
         }
     }
+
+    fun updateDevice(device: Device) {
+        viewModelScope.launch {
+            repository.updateDeviceData(device)
+        }
+    }
 }

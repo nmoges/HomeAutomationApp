@@ -48,8 +48,19 @@ class Repository(
          deviceDao.insertDeviceData(deviceEntity)
      }
 
-     suspend fun updateDeviceData(deviceEntity: DeviceEntity) {
-         deviceDao.updateDeviceData(deviceEntity)
+     suspend fun updateDeviceData(device: Device) {
+         when (device) {
+             is Device.Heater -> {
+                 deviceDao.updateDeviceData(device.toDeviceEntity())
+             }
+             is Device.Light -> {
+                 deviceDao.updateDeviceData(device.toDeviceEntity())
+             }
+             is Device.RollerShutter -> {
+                 deviceDao.updateDeviceData(device.toDeviceEntity())
+             }
+         }
+
      }
 
      suspend fun deleteDeviceData(deviceEntity: DeviceEntity) {

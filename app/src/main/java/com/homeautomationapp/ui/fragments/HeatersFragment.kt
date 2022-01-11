@@ -85,6 +85,7 @@ class HeatersFragment : Fragment(), FragmentUI {
 
     private fun handleSaveButtonListener() {
         binding.button.setOnClickListener {
+            saveNewHeaterValues()
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
@@ -92,5 +93,13 @@ class HeatersFragment : Fragment(), FragmentUI {
 
     private fun getSelectedHeaterDevice() {
         heater = (activity as MainActivity).viewModel.selectedDevice as Device.Heater
+    }
+
+    private fun saveNewHeaterValues() {
+        heater.apply {
+            mode = if (binding.switchStatus.isChecked) "ON" else "OFF"
+            temperature = binding.slider.values[0].toInt()
+        }
+        (activity as MainActivity).viewModel.updateDevice(heater)
     }
 }
