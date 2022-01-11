@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentDevicesManagerBinding
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.adapters.ManagerAdapter
+import com.homeautomationapp.ui.dialogs.DialogDelete
+import com.homeautomationapp.utils.NameDeviceComparator
+import java.util.*
 
 class ManagerFragment : Fragment() {
 
@@ -50,7 +54,7 @@ class ManagerFragment : Fragment() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = ManagerAdapter()
+            adapter = ManagerAdapter { index -> displayDialog(index) }
         }
     }
 
@@ -59,10 +63,18 @@ class ManagerFragment : Fragment() {
         (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
             (binding.recyclerView.adapter as ManagerAdapter).apply {
                 listDevices.apply {
+                    Collections.sort(list, NameDeviceComparator)
                     addAll(list)
                 }
                 notifyDataSetChanged()
             }
         })
     }
+
+    private fun displayDialog(index: Int) {
+        DialogDelete(index) {
+            /* TODO() : Not implemented yet */
+        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_DELETE)
+    }
+
 }

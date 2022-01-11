@@ -7,14 +7,16 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
-class DialogDelete : DialogFragment() {
+class DialogDelete(private val index: Int, val callback: (Int) -> Unit) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
                 .setTitle(resources.getString(R.string.title_dialog_delete))
                 .setMessage(resources.getString(R.string.message_dialog_delete))
-                .setPositiveButton(resources.getString(R.string.btn_confirm_dialog)) { _, _ -> }
+                .setPositiveButton(resources.getString(R.string.btn_confirm_dialog)) { _, _ ->
+                    callback(index)
+                }
                 .setNegativeButton(resources.getString(R.string.btn_cancel_dialog)) { _, _ -> }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

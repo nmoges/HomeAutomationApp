@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentLightsBinding
+import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 
 class LightsFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentLightsBinding
+
+    private lateinit var light: Device.Light
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +32,8 @@ class LightsFragment : Fragment(), FragmentUI {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment((activity as MainActivity),
                                     resources.getString(R.string.name_toolbar_frg_lights))
-        initializeSlider()
-        initializeTextViewDeviceStatus()
+        getSelectedLightDevice()
+        initializeViews()
         handleSwitchListener()
         handleSliderListener()
         handleSaveButtonListener()
@@ -60,12 +63,23 @@ class LightsFragment : Fragment(), FragmentUI {
         binding.currentLuminosity.text = luminosity
     }
 
-    private fun initializeSlider() {
-        binding.slider.isEnabled = false
-    }
-
-    private fun initializeTextViewDeviceStatus() {
-        updateMaterialTextViewDeviceStatus(binding.slider.isEnabled, binding.statusOnOff)
+    /**
+     * Initializes all fragment views with selected light device values.
+     */
+    private fun initializeViews() {
+        val status = light.mode == "ON"
+        // Slider
+        binding.slider.apply {
+            this.isEnabled = status
+            updateSliderActiveColor(status, this)
+            light.luminosity?.let { this.setValues(it.toFloat()) }
+        }
+        // Switch
+        binding.switchStatus.isChecked = status
+        // MaterialTexts
+        updateMaterialTextViewDeviceStatus(status, binding.statusOnOff)
+        updateMaterialTextViewBackgroundColor(status, binding.currentLuminosity)
+        light.luminosity?.let { updateMaterialTextViewSelectedLuminosity(it.toString()) }
     }
 
     private fun handleSaveButtonListener() {
@@ -73,5 +87,9 @@ class LightsFragment : Fragment(), FragmentUI {
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
+    }
+
+    private fun getSelectedLightDevice() {
+        light = (activity as MainActivity).viewModel.selectedDevice as Device.Light
     }
 }

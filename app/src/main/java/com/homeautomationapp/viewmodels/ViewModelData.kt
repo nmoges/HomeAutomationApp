@@ -18,6 +18,7 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
 
     val devicesLiveData: MutableLiveData<List<Device>> = MutableLiveData()
 
+    lateinit var selectedDevice: Device
     /**
      * Initializes database at launch.
      */
@@ -31,7 +32,6 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
 
     private fun getListOfDevices() {
         viewModelScope.launch {
-
             devicesLiveData.postValue(repository.getAllDevices())
         }
     }

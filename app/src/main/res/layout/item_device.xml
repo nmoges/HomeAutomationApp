@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_card_behavior">
+        android:background="@drawable/background_card">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name_device"
@@ -29,7 +29,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_trash"
-            android:src="@drawable/ic_baseline_delete_24dp_white"
+            android:src="@drawable/icon_behavior"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"

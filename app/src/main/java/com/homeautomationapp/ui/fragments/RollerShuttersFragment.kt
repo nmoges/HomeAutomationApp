@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentRollerShuttersBinding
+import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 
 class RollerShuttersFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentRollerShuttersBinding
+
+    private lateinit var rollerShutter: Device.RollerShutter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,10 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment((activity as MainActivity),
                                     resources.getString(R.string.name_toolbar_frg_roller_shutters))
-        updateMaterialTextViewBackgroundColor(true, binding.currentRollerShutter) // Always true for roller shutters
+        getSelectedRollerShutterDevice()
+        initializeViews()
+
+
         handleSliderListener()
         handleSaveButtonListener()
     }
@@ -50,10 +56,26 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
         binding.currentRollerShutter.text = value
     }
 
+    /**
+     * Initializes all fragment views with selected roller shutter device values.
+     */
+    private fun initializeViews() {
+        binding.slider.apply {
+            rollerShutter.position?.let { this.setValues(it.toFloat()) }
+            updateSliderActiveColor(true, this)
+        }
+        updateMaterialTextViewRollerShuttersValue(rollerShutter.position.toString())
+        updateMaterialTextViewBackgroundColor(true, binding.currentRollerShutter)
+    }
+
     private fun handleSaveButtonListener() {
         binding.button.setOnClickListener {
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
+    }
+
+    private fun getSelectedRollerShutterDevice() {
+        rollerShutter = (activity as MainActivity).viewModel.selectedDevice as Device.RollerShutter
     }
 }

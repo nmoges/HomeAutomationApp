@@ -42,12 +42,12 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
         return ListDevicesViewHolder(view, onItemClicked)
     }
 
-    override fun onBindViewHolder(holder: ListDevicesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListDevicesViewHolder, index: Int) {
         holder.apply {
-            name.text = listDevices[position].deviceName
-            displayIcon(icon, listDevices[position].productType)
-            displayValue(value, listDevices[position])
-            displayStatus(status, listDevices[position])
+            name.text = listDevices[index].deviceName
+            displayIcon(icon, listDevices[index].productType)
+            displayValue(value, listDevices[index])
+            displayStatus(status, listDevices[index])
         }
     }
 

@@ -13,7 +13,8 @@ import com.homeautomationapp.ui.fragments.ManagerFragment
 /**
  * Adapter class for [ManagerFragment].
  */
-class ManagerAdapter(): RecyclerView.Adapter<ManagerAdapter.ManagerViewHolder>() {
+class ManagerAdapter(private val onItemClicked: (Int) -> Unit):
+    RecyclerView.Adapter<ManagerAdapter.ManagerViewHolder>() {
 
     var listDevices: MutableList<Device> = mutableListOf()
 
@@ -28,17 +29,18 @@ class ManagerAdapter(): RecyclerView.Adapter<ManagerAdapter.ManagerViewHolder>()
         return ManagerViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ManagerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ManagerViewHolder, index: Int) {
         holder.apply {
-            name.text = listDevices[position].deviceName
-            handleClickOnItem(icon, position)
+            name.text = listDevices[index].deviceName
+            handleClickOnItem(icon, index)
         }
     }
 
-    private fun handleClickOnItem(icon: AppCompatImageView, position: Int) {
+    private fun handleClickOnItem(icon: AppCompatImageView, index: Int) {
         icon.setOnClickListener {
-            /* TODO() : Not implemented yet */
+            onItemClicked(index)
         }
     }
+
     override fun getItemCount(): Int = listDevices.size
 }

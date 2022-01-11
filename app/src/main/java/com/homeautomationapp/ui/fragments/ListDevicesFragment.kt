@@ -95,9 +95,10 @@ class ListDevicesFragment : Fragment() {
         }
     }
 
-    private fun onItemClicked(position: Int) {
-        val type =  (binding.recyclerView.adapter as ListDevicesAdapter).listDevices[position].productType
-        when (type) {
+    private fun onItemClicked(index: Int) {
+        val device = (binding.recyclerView.adapter as ListDevicesAdapter).listDevices[index]
+        (activity as MainActivity).viewModel.selectedDevice = device
+        when (device.productType) {
             "Heater" -> {
                 (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_HEATERS)
             }
@@ -108,6 +109,5 @@ class ListDevicesFragment : Fragment() {
                 (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_ROLLER_SHUTTERS)
             }
         }
-
     }
 }

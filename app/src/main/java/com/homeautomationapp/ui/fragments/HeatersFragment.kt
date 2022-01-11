@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentHeatersBinding
+import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 
 class HeatersFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentHeatersBinding
+
+    private lateinit var heater: Device.Heater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +32,8 @@ class HeatersFragment : Fragment(), FragmentUI {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment((activity as MainActivity),
                                      resources.getString(R.string.name_toolbar_frg_heaters))
-        initializeSlider()
-        initializeTextViewDeviceStatus()
+        getSelectedHeaterDevice()
+        initializeViews()
         handleSwitchListener()
         handleSliderListener()
         handleSaveButtonListener()
@@ -61,12 +64,23 @@ class HeatersFragment : Fragment(), FragmentUI {
         binding.currentTempHeater.text = temperature
     }
 
-    private fun initializeSlider() {
-        binding.slider.isEnabled = false
-    }
-
-    private fun initializeTextViewDeviceStatus() {
-        updateMaterialTextViewDeviceStatus(binding.slider.isEnabled, binding.statusOnOff)
+    /**
+     * Initializes all fragments views with selected heater device values.
+     */
+    private fun initializeViews() {
+        val status = heater.mode == "ON"
+        // Slider
+        binding.slider.apply {
+            this.isEnabled = status
+            updateSliderActiveColor(status, this)
+            heater.temperature?.let { this.setValues(it.toFloat()) }
+        }
+        // Switch
+        binding.switchStatus.isChecked = status
+        // MaterialTexts
+        updateMaterialTextViewDeviceStatus(status, binding.statusOnOff)
+        updateMaterialTextViewBackgroundColor(status, binding.currentTempHeater)
+        heater.temperature?.let { updateMaterialTextViewSelectedTemperature(it.toString()) }
     }
 
     private fun handleSaveButtonListener() {
@@ -74,5 +88,9 @@ class HeatersFragment : Fragment(), FragmentUI {
             displayToastSaveMessage(context, resources.getString(R.string.toast_modifications_applied))
             (activity as MainActivity).removeFragmentFromBackStack()
         }
+    }
+
+    private fun getSelectedHeaterDevice() {
+        heater = (activity as MainActivity).viewModel.selectedDevice as Device.Heater
     }
 }

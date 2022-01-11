@@ -11,4 +11,5 @@ object AppConstants {
     const val TAG_DIALOG_RESET = "TAG_DIALOG_RESET"
     const val TAG_DIALOG_FILTER = "TAG_DIALOG_FILTER"
     const val TAG_DIALOG_SAVE = "TAG_DIALOG_SAVE"
+    const val TAG_DIALOG_DELETE = "TAG_DIALOG_DELETE"
 }
