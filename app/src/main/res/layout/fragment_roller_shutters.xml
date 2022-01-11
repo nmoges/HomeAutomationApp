@@ -82,7 +82,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/button_save"
+        android:text="@string/button_apply"
         android:layout_gravity="center_horizontal"
         style="@style/MaterialButtonStyle"/>
 </LinearLayout>

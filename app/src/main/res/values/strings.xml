@@ -53,7 +53,7 @@
 
     <!-- FRAGMENT LAYOUTS -->
     <!-- fragment_heaters.xml -->
-    <string name="button_save">Save</string>
+    <string name="button_apply">Apply</string>
     <string name="status_device">Status:</string>
     <string name="min_temp_heater">min : 7°C</string>
     <string name="max_temp_heater">max : 28°C</string>
@@ -101,5 +101,4 @@
     <string name="frg_roller_shutters_label">RollerShuttersFragment</string>
     <string name="frg_user_profile_label">UserProfileFragment</string>
     <string name="frg_devices_manager">DevicesManagerFragment</string>
-
 </resources>

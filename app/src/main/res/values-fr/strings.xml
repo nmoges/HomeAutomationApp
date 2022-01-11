@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">HomeAutomationApp</string>
+
+    <!-- DIALOGS -->
+    <!-- DialogCancellation.kt -->
+    <string name="title_dialog_cancellation">Annuler</string>
+    <string name="message_dialog_cancellation">Les modification vont être annulées. Confirmer ?</string>
+
+    <!-- DialogDelete.kt -->
+    <string name="title_dialog_delete">Supprimer appareil</string>
+    <string name="message_dialog_delete">Cet appareil va être supprimé. Confirmer ?</string>
+
+    <!-- DialogFilter.kt -->
+    <string name="title_dialog_filter">Sélectionner type d\'appareil</string>
+
+    <!-- DialogReset.kt -->
+    <string name="title_dialog_reset">Reset</string>
+    <string name="message_dialog_reset">Tous les champs seront réinitialisés. Confirmer ?</string>
+
+    <!-- DialogReset.kt / DialogCancellation.kt -->
+    <string name="btn_yes_dialog">Oui</string>
+    <string name="btn_no_dialog">Non</string>
+    <string name="btn_confirm_dialog">Confirmer</string>
+    <string name="btn_cancel_dialog">Annuler</string>
+
+
+    <!-- FRAGMENTS -->
+    <!-- DevicesManagerFragment.kt -->
+    <string name="name_toolbar_frg_devices_manager">Gérer les appareils</string>
+
+    <!-- FragmentUI.kt -->
+    <string name="toast_modifications_applied">Modifications appliquées</string>
+
+    <!-- HeatersFragment.kt -->
+    <string name="name_toolbar_frg_heaters">Radiateurs</string>
+
+    <!-- LightsFragment.kt -->
+    <string name="name_toolbar_frg_lights">Lumières</string>
+
+    <!-- ListDevicesFragment.kt -->
+    <string name="name_toolbar_frg_list_devices">Liste des appareils</string>
+
+    <!-- RollerShuttersFragment.kt -->
+    <string name="name_toolbar_frg_roller_shutters">Volet</string>
+
+    <!-- UserProfileFragment.kt -->
+    <string name="name_toolbar_frg_user_profile">Profil</string>
+    <string name="toast_confirmation">Modifications enregistrées</string>
+    <string name="error_text_input_empty">Vide</string>
+    <string name="error_text_input_invalid_format">Format invalide</string>
+    <string name="error_toast_message">Mise à jour échouée. Informations manquantes.</string>
+
+
+    <!-- FRAGMENT LAYOUTS -->
+    <!-- fragment_heaters.xml -->
+    <string name="button_apply">Appliquer</string>
+    <string name="status_device">Statut:</string>
+    <string name="min_temp_heater">min : 7°C</string>
+    <string name="max_temp_heater">max : 28°C</string>
+    <string name="current_temp_heater">%1$d °C</string>
+
+    <!-- fragment_lights.xml -->
+    <string name="min_luminosity">min : 0</string>
+    <string name="max_luminosity">max : 100</string>
+    <string name="current_luminosity">0</string>
+
+    <!-- fragment_roller_shutters.xml -->
+    <string name="min_roller_shutter">min : 0</string>
+    <string name="max_roller_shutter">max : 100</string>
+    <string name="current_roller_shutter">0</string>
+
+    <!-- fragment_user_profile.xml -->
+    <string name="hint_edit_first_name">Prénom</string>
+    <string name="hint_edit_last_name">Nom</string>
+    <string name="hint_edit_birthdate">Date de naissance</string>
+    <string name="hint_edit_email">Email</string>
+    <string name="hint_edit_phone">Téléphone</string>
+    <string name="hint_edit_street_number">Numéro rue</string>
+    <string name="hint_edit_street_name">Nom rue</string>
+    <string name="hint_edit_postal_code">Code postal</string>
+    <string name="hint_edit_city">Ville</string>
+    <string name="hint_edit_country">Pays</string>
+    <string name="button_confirm_profile">Confirmer</string>
+
+
+    <!-- MENU -->
+    <!-- menu_fragment_list_devices.xml -->
+    <string name="menu_item_user_profile">Profil</string>
+    <string name="menu_item_filter">Filtrer</string>
+    <string name="menu_item_manage_devices">Gérer appareils</string>
+
+    <!-- menu_fragment_user_profile.xml -->
+    <string name="menu_item_clear">Effacer champs</string>
+
+
+    <!-- NAVIGATION -->
+    <!-- nav_graph.xml -->
+    <string name="frg_list_devices_label">ListDevicesFragment</string>
+    <string name="frg_lights_label">LightsFragment</string>
+    <string name="frg_heaters_label">HeatersFragment</string>
+    <string name="frg_roller_shutters_label">RollerShuttersFragment</string>
+    <string name="frg_user_profile_label">UserProfileFragment</string>
+    <string name="frg_devices_manager">DevicesManagerFragment</string>
+</resources>
