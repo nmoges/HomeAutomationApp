@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/frg_roller_shutters"
         android:name="com.homeautomationapp.ui.fragments.RollerShuttersFragment"
-        android:label="@string/frg_heaters_label"
+        android:label="@string/frg_roller_shutters_label"
         tools:layout="@layout/fragment_roller_shutters"/>
 
     <fragment
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/frg_devices_manager"
-        android:name="com.homeautomationapp.ui.fragments.DevicesManagerFragment"
+        android:name="com.homeautomationapp.ui.fragments.ManagerFragment"
         android:label="@string/frg_devices_manager"
         tools:layout="@layout/fragment_devices_manager"/>
 </navigation>

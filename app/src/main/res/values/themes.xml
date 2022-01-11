@@ -63,4 +63,9 @@
     <style name="DatePickerDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/dark_blue_23pr</item>
     </style>
+
+    <style name="CardViewStyle">
+        <item name="cardBackgroundColor">#00000000</item>
+        <item name="cardCornerRadius">15dp</item>
+    </style>
 </resources>

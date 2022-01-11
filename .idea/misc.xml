@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_card.xml" value="0.1765625" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_card.xml" value="0.8" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_card_behavior.xml" value="0.11927083333333334" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_card_clicked.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_constraint_layout.xml" value="0.1765625" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_material_text_view.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/background_material_text_view_grey.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/gradient_constraint_layout.xml" value="0.18177083333333333" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/gradient_material_button.xml" value="0.4" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/ic_baseline_ac_unit_24dp_white.xml" value="0.1" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/ic_baseline_delete_24dp_white.xml" value="0.20625" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/drawable/text_input_layour_border_color.xml" value="0.1" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -19,8 +22,8 @@
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_list_devices.xml" value="0.14486711829077645" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_roller_shutters.xml" value="0.264" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/fragment_user_profile.xml" value="0.3007915567282322" />
-        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device.xml" value="0.264" />
-        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device_details.xml" value="0.4" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device.xml" value="0.40523690773067333" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/layout/item_device_details.xml" value="0.264" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/menu/menu_fragment_list_devices.xml" value="0.1" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/HomeAutomationApp/app/src/main/res/menu/menu_fragment_user_profile.xml" value="0.18229166666666666" />
       </map>

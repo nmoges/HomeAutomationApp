@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.homeautomationapp.AppConstants
+import com.homeautomationapp.ui.adapters.ListDevicesAdapter
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentListDevicesBinding
 import com.homeautomationapp.ui.activities.MainActivity
@@ -30,6 +32,8 @@ class ListDevicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment()
+        initializeRecyclerView()
+        initializeViewModelObserver()
     }
 
     private fun initializeToolbarForFragment() {
@@ -67,5 +71,43 @@ class ListDevicesFragment : Fragment() {
 
     private fun displayFilterDialog() {
         DialogFilter().show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initializeViewModelObserver() {
+        (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
+            (binding.recyclerView.adapter as ListDevicesAdapter).apply {
+                listDevices.apply {
+                    clear()
+                    addAll(list)
+                }
+                notifyDataSetChanged()
+            }
+        })
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initializeRecyclerView() {
+        binding.recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = ListDevicesAdapter(context) { position -> onItemClicked(position) }
+        }
+    }
+
+    private fun onItemClicked(position: Int) {
+        val type =  (binding.recyclerView.adapter as ListDevicesAdapter).listDevices[position].productType
+        when (type) {
+            "Heater" -> {
+                (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_HEATERS)
+            }
+            "Light" -> {
+                (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_LIGHTS)
+            }
+            "RollerShutter" -> {
+                (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_ROLLER_SHUTTERS)
+            }
+        }
+
     }
 }

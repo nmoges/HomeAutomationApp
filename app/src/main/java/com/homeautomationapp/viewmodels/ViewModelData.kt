@@ -23,7 +23,16 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
      */
     fun initializeDB(context: Context) {
         viewModelScope.launch {
-            if (repository.getAllDevices().isEmpty()) repository.initializeDbWithJSONData(context)
+            if (repository.getAllDevices().isEmpty()) {
+                repository.initializeDbWithJSONData(context)
+            }
+        }.invokeOnCompletion { getListOfDevices() }
+    }
+
+    private fun getListOfDevices() {
+        viewModelScope.launch {
+
+            devicesLiveData.postValue(repository.getAllDevices())
         }
     }
 }

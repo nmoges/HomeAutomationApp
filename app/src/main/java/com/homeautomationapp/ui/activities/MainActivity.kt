@@ -38,7 +38,9 @@ class MainActivity : AppCompatActivity() {
         initializeToolbar()
         initializeNavigation()
         initializeViewModel()
-        viewModel.initializeDB(applicationContext)
+        viewModel.let {
+            it.initializeDB(applicationContext)
+        }
     }
 
     private fun initializeNavigation() {
@@ -79,13 +81,13 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.action_frg_list_devices_to_frg_user_profile)
             }
             AppConstants.TAG_FRAGMENT_HEATERS -> {
-                // TODO : not implemented yet
+                navController.navigate(R.id.action_frg_list_devices_to_frg_heaters)
             }
             AppConstants.TAG_FRAGMENT_LIGHTS -> {
-                // TODO : not implemented yet
+                navController.navigate(R.id.action_frg_list_devices_to_frg_lights)
             }
             AppConstants.TAG_FRAGMENT_ROLLER_SHUTTERS -> {
-                // TODO : not implemented yet
+                navController.navigate(R.id.action_frg_list_devices_to_frg_roller_shutters)
             }
             AppConstants.TAG_FRAGMENT_DEVICES_MANAGER -> {
                 navController.navigate(R.id.action_frg_list_devices_to_frg_devices_manager)
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 resources.getString(R.string.frg_roller_shutters_label) -> {
+
                     supportFragmentManager.primaryNavigationFragment
                                           ?.childFragmentManager?.fragments?.get(0)?.let {
                         (it as RollerShuttersFragment).displayCancellationDialog(this,
@@ -124,9 +127,7 @@ class MainActivity : AppCompatActivity() {
                                                                           supportFragmentManager)
                     }
                 }
-                else -> {
-                    super.onBackPressed()
-                }
+                else -> { super.onBackPressed() }
             }
         }
     }

@@ -29,6 +29,7 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment((activity as MainActivity),
                                     resources.getString(R.string.name_toolbar_frg_roller_shutters))
+        updateMaterialTextViewBackgroundColor(true, binding.currentRollerShutter) // Always true for roller shutters
         handleSliderListener()
         handleSaveButtonListener()
     }
