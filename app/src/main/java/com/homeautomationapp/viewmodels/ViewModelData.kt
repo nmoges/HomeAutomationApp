@@ -42,4 +42,10 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
             userLiveData.postValue(repository.getUser())
         }
     }
+
+    fun updateUserData(user: User) {
+        viewModelScope.launch {
+            repository.updateUserData(user)
+        }
+    }
 }

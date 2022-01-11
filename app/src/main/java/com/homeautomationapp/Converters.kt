@@ -74,6 +74,7 @@ fun UserEntity.toUser(): User {
 }
 
 fun User.toUserEntity() = UserEntity(
+    id = 1,
     firstName = this.firstName,
     lastName = this.lastName,
     birthdate = this.birthdate,

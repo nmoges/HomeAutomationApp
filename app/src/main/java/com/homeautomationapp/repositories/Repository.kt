@@ -36,8 +36,8 @@ class Repository(
          userDao.insertUserData(userEntity)
     }
 
-     suspend fun updateUserData(userEntity: UserEntity) {
-         userDao.updateUserData(userEntity)
+     suspend fun updateUserData(user: User) {
+         userDao.updateUserData(user.toUserEntity())
      }
 
      suspend fun getUser(): User {

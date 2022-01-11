@@ -2,7 +2,6 @@ package com.homeautomationapp.ui.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -93,6 +92,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
     private fun handleConfirmationButton() {
         binding.button.setOnClickListener {
             if (!detectIfEmptyFields()) {
+                saveNewUserInformation()
                 Toast.makeText(context, R.string.toast_confirmation, Toast.LENGTH_SHORT).show()
                 (activity as MainActivity).removeFragmentFromBackStack()
             }
@@ -253,5 +253,23 @@ class UserProfileFragment : Fragment(), FragmentUI {
         Toast.makeText(context,
                        resources.getString(R.string.error_toast_message),
                        Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveNewUserInformation() {
+        binding.let {
+            user.apply {
+                firstName = it.textInputEditFirstName.text.toString()
+                lastName = it.textInputEditLastName.text.toString()
+                birthdate = it.textInputEditBirthdate.text.toString()
+                email = it.textInputEditEmail.text.toString()
+                phone = it.textInputEditPhone.text.toString()
+                address.streetNumber = it.textInputEditStreetNumber.text.toString()
+                address.streetName = it.textInputEditStreetName.text.toString()
+                address.postalCode = it.textInputEditPostalCode.text.toString().toInt()
+                address.city = it.textInputEditCity.text.toString()
+                address.country = it.textInputEditCountry.text.toString()
+            }
+            (activity as MainActivity).viewModel.updateUserData(user)
+        }
     }
 }
