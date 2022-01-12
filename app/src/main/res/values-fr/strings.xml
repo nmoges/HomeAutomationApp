@@ -40,6 +40,9 @@
     <!-- ListDevicesFragment.kt -->
     <string name="name_toolbar_frg_list_devices">Liste des appareils</string>
 
+    <!-- ManagerFragment.kt -->
+    <string name="toast_deleted_device">Appareil supprimé</string>
+
     <!-- RollerShuttersFragment.kt -->
     <string name="name_toolbar_frg_roller_shutters">Volet</string>
 

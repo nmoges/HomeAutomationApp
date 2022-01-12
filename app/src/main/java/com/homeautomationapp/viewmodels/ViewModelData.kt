@@ -57,4 +57,11 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
             repository.updateDeviceData(device)
         }
     }
+
+    fun deleteDevice(device: Device) {
+        viewModelScope.launch {
+            repository.deleteDeviceData(device)
+            devicesLiveData.postValue(repository.getAllDevices())
+        }
+    }
 }

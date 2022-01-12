@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.homeautomationapp.AppConstants
@@ -23,6 +24,8 @@ class ManagerFragment : Fragment() {
 
     private var dialogDelete: DialogDelete? = null
 
+    private var index: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -39,7 +42,10 @@ class ManagerFragment : Fragment() {
         initializeToolbarForFragment()
         initializeRecyclerView()
         initializeViewModelObserver()
-        savedInstanceState?.let { restoreDialogDelete(it) }
+        savedInstanceState?.let {
+            restoreIndex(it)
+            restoreDialogDelete(it)
+        }
     }
 
     private fun initializeToolbarForFragment() {
@@ -66,6 +72,7 @@ class ManagerFragment : Fragment() {
         (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
             (binding.recyclerView.adapter as ManagerAdapter).apply {
                 listDevices.apply {
+                    clear()
                     Collections.sort(list, NameDeviceComparator)
                     addAll(list)
                 }
@@ -74,6 +81,9 @@ class ManagerFragment : Fragment() {
         })
     }
 
+    /**
+     * Restores delete dialog display after a configuration change.
+     */
     private fun restoreDialogDelete(savedInstanceState: Bundle) {
         if (savedInstanceState.getBoolean("dialog_delete")) {
             if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_DELETE) != null) {
@@ -81,22 +91,42 @@ class ManagerFragment : Fragment() {
                 dialogDelete = parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_DELETE)
                                as DialogDelete
                 dialogDelete?.apply {
-                    callbackDialog = {  }
+                    callbackDialog = { deleteDevice(index) }
                 }
             }
         }
     }
 
+    /**
+     * Restore index of a selected item in the list before a configuration change.
+     */
+    private fun restoreIndex(savedInstanceState: Bundle) {
+        index = savedInstanceState.getInt("selected_item")
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.apply {
+            putInt("selected_item", index)
             dialogDelete?.let { this.putBoolean("dialog_delete", it.showsDialog) }
         }
     }
+
     private fun displayDialog(index: Int) {
         dialogDelete = DialogDelete(index) {
-            /* TODO() : Not implemented yet */
+            deleteDevice(index)
         }
         dialogDelete?.show(parentFragmentManager, AppConstants.TAG_DIALOG_DELETE)
+    }
+
+    /**
+     * Delete selected device in database.
+     */
+    private fun deleteDevice(index: Int) {
+        val device = (binding.recyclerView.adapter as ManagerAdapter).listDevices[index]
+        (activity as MainActivity).viewModel.deleteDevice(device)
+        Toast.makeText(context,
+                       resources.getString(R.string.toast_deleted_device),
+                       Toast.LENGTH_SHORT).show()
     }
 }

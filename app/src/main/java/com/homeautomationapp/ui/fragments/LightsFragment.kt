@@ -34,9 +34,8 @@ class LightsFragment : Fragment(), FragmentUI {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeToolbarForFragment((activity as MainActivity),
-                                    resources.getString(R.string.name_toolbar_frg_lights))
         getSelectedLightDevice()
+        initializeToolbarForFragment((activity as MainActivity), light.deviceName)
         initializeViews()
         handleSwitchListener()
         handleSliderListener()

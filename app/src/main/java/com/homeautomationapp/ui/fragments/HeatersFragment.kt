@@ -12,7 +12,6 @@ import com.homeautomationapp.databinding.FragmentHeatersBinding
 import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.dialogs.DialogCancellation
-import com.homeautomationapp.ui.dialogs.DialogFilter
 
 class HeatersFragment : Fragment(), FragmentUI {
 
@@ -35,9 +34,8 @@ class HeatersFragment : Fragment(), FragmentUI {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeToolbarForFragment((activity as MainActivity),
-                                     resources.getString(R.string.name_toolbar_frg_heaters))
         getSelectedHeaterDevice()
+        initializeToolbarForFragment((activity as MainActivity), heater.deviceName)
         initializeViews()
         handleSwitchListener()
         handleSliderListener()

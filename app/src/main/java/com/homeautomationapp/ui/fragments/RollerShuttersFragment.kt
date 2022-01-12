@@ -34,9 +34,8 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeToolbarForFragment((activity as MainActivity),
-                                    resources.getString(R.string.name_toolbar_frg_roller_shutters))
         getSelectedRollerShutterDevice()
+        initializeToolbarForFragment((activity as MainActivity), rollerShutter.deviceName)
         initializeViews()
         handleSliderListener()
         handleSaveButtonListener()
