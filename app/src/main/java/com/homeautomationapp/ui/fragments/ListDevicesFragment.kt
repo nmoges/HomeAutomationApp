@@ -8,15 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.homeautomationapp.AppConstants
-import com.homeautomationapp.ui.adapters.ListDevicesAdapter
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentListDevicesBinding
 import com.homeautomationapp.ui.activities.MainActivity
+import com.homeautomationapp.ui.adapters.ListDevicesAdapter
 import com.homeautomationapp.ui.dialogs.DialogFilter
 
 class ListDevicesFragment : Fragment() {
 
     private lateinit var binding: FragmentListDevicesBinding
+
+    private val filters: BooleanArray = booleanArrayOf(true, true, true)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +72,13 @@ class ListDevicesFragment : Fragment() {
     }
 
     private fun displayFilterDialog() {
-        DialogFilter().show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
+        DialogFilter(filters) {
+            onDialogFilterChanged()
+        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
+    }
+
+    private fun onDialogFilterChanged() {
+
     }
 
     @SuppressLint("NotifyDataSetChanged")

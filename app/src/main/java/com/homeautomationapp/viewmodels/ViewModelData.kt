@@ -1,15 +1,16 @@
 package com.homeautomationapp.viewmodels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.homeautomationapp.model.Device
 import com.homeautomationapp.model.User
 import com.homeautomationapp.repositories.Repository
+import com.homeautomationapp.utils.NameDeviceComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +34,9 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
 
     private fun getListOfDevices() {
         viewModelScope.launch {
-            devicesLiveData.postValue(repository.getAllDevices())
+            val list = repository.getAllDevices()
+            Collections.sort(list, NameDeviceComparator)
+            devicesLiveData.postValue(list)
         }
     }
 
