@@ -124,7 +124,7 @@ class HeatersFragment : Fragment(), FragmentUI {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.apply {
-            dialogCancel?.let { this.putBoolean("dialog_cancel", it.showsDialog)}
+            dialogCancel?.let { this.putBoolean("dialog_cancel", it.showsDialog) }
         }
     }
 

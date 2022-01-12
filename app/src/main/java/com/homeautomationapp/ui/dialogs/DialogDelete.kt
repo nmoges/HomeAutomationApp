@@ -7,7 +7,14 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
-class DialogDelete(private val index: Int, val callback: (Int) -> Unit) : DialogFragment() {
+class DialogDelete() : DialogFragment() {
+
+    var indexDialog : Int = 0
+    lateinit var callbackDialog: (Int) -> (Unit)
+    constructor(index: Int, callback: (Int) -> Unit): this() {
+        indexDialog = index
+        callbackDialog = callback
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -15,7 +22,7 @@ class DialogDelete(private val index: Int, val callback: (Int) -> Unit) : Dialog
                 .setTitle(resources.getString(R.string.title_dialog_delete))
                 .setMessage(resources.getString(R.string.message_dialog_delete))
                 .setPositiveButton(resources.getString(R.string.btn_confirm_dialog)) { _, _ ->
-                    callback(index)
+                    callbackDialog(indexDialog)
                 }
                 .setNegativeButton(resources.getString(R.string.btn_cancel_dialog)) { _, _ -> }
             builder.create()

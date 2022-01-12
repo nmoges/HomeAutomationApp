@@ -21,6 +21,8 @@ class ManagerFragment : Fragment() {
 
     private lateinit var binding: FragmentDevicesManagerBinding
 
+    private var dialogDelete: DialogDelete? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -37,6 +39,7 @@ class ManagerFragment : Fragment() {
         initializeToolbarForFragment()
         initializeRecyclerView()
         initializeViewModelObserver()
+        savedInstanceState?.let { restoreDialogDelete(it) }
     }
 
     private fun initializeToolbarForFragment() {
@@ -71,10 +74,29 @@ class ManagerFragment : Fragment() {
         })
     }
 
-    private fun displayDialog(index: Int) {
-        DialogDelete(index) {
-            /* TODO() : Not implemented yet */
-        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_DELETE)
+    private fun restoreDialogDelete(savedInstanceState: Bundle) {
+        if (savedInstanceState.getBoolean("dialog_delete")) {
+            if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_DELETE) != null) {
+                // Get previous instance (before configuration change) and reinitialize properties
+                dialogDelete = parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_DELETE)
+                               as DialogDelete
+                dialogDelete?.apply {
+                    callbackDialog = {  }
+                }
+            }
+        }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            dialogDelete?.let { this.putBoolean("dialog_delete", it.showsDialog) }
+        }
+    }
+    private fun displayDialog(index: Int) {
+        dialogDelete = DialogDelete(index) {
+            /* TODO() : Not implemented yet */
+        }
+        dialogDelete?.show(parentFragmentManager, AppConstants.TAG_DIALOG_DELETE)
+    }
 }
