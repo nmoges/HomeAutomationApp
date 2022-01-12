@@ -20,6 +20,8 @@ class ListDevicesFragment : Fragment() {
 
     private val filters: BooleanArray = booleanArrayOf(true, true, true)
 
+    private var dialogFilter: DialogFilter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -36,6 +38,10 @@ class ListDevicesFragment : Fragment() {
         initializeToolbarForFragment()
         initializeRecyclerView()
         initializeViewModelObserver()
+        savedInstanceState?.let {
+            restoreFiltersValues(it)
+            restoreDialogFilter(it)
+        }
     }
 
     private fun initializeToolbarForFragment() {
@@ -72,13 +78,12 @@ class ListDevicesFragment : Fragment() {
     }
 
     private fun displayFilterDialog() {
-        DialogFilter(filters) {
-            onDialogFilterChanged()
-        }.show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
+        dialogFilter = DialogFilter(filters) { onDialogFilterChanged() }
+        dialogFilter?.show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
     }
 
     private fun onDialogFilterChanged() {
-
+        /* TODO(): Not implemented yet */
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -117,5 +122,44 @@ class ListDevicesFragment : Fragment() {
                 (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_ROLLER_SHUTTERS)
             }
         }
+    }
+
+    /**
+     * Restores filters values after a configuration change.
+     */
+    private fun restoreFiltersValues(savedInstanceState: Bundle) {
+        savedInstanceState.let { it ->
+            filters[0] = it.getBoolean("filter_lights")
+            filters[1] = it.getBoolean("filter_heaters")
+            filters[2] = it.getBoolean("filter_roller_shutters")
+        }
+    }
+
+    /**
+     * Restores dialog filter display after a configuration change.
+     */
+    private fun restoreDialogFilter(savedInstanceState: Bundle) {
+        if (savedInstanceState.getBoolean("dialog_filter_status")) {
+            if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_FILTER) != null) {
+                // Get previous instance (before configuration change) and reinitialize properties
+                dialogFilter = parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_FILTER)
+                               as DialogFilter
+                dialogFilter?.apply {
+                    arrayDialog = filters
+                    callbackDialog = { onDialogFilterChanged() }
+                }
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            this.putBoolean("filter_lights", filters[0])
+            this.putBoolean("filter_heaters", filters[1])
+            this.putBoolean("filter_roller_shutters", filters[2])
+            dialogFilter?.let { this.putBoolean("dialog_filter_status", it.showsDialog) }
+        }
+
     }
 }

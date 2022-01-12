@@ -6,16 +6,21 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentHeatersBinding
 import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
+import com.homeautomationapp.ui.dialogs.DialogCancellation
+import com.homeautomationapp.ui.dialogs.DialogFilter
 
 class HeatersFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentHeatersBinding
 
     private lateinit var heater: Device.Heater
+
+    private var dialogCancel: DialogCancellation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +42,11 @@ class HeatersFragment : Fragment(), FragmentUI {
         handleSwitchListener()
         handleSliderListener()
         handleSaveButtonListener()
+        savedInstanceState?.let { restoreDialogCancellation(it) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) displayCancellationDialog((activity as MainActivity),
-                                                                        parentFragmentManager)
+        if (item.itemId == android.R.id.home) displayCancellationDialog()
         return super.onOptionsItemSelected(item)
     }
 
@@ -101,5 +106,32 @@ class HeatersFragment : Fragment(), FragmentUI {
             temperature = binding.slider.values[0].toInt()
         }
         (activity as MainActivity).viewModel.updateDevice(heater)
+    }
+
+    private fun restoreDialogCancellation(savedInstanceState: Bundle) {
+        if (savedInstanceState.getBoolean("dialog_cancel")) {
+            if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_CANCELLATION) != null) {
+                // Get previous instance (before configuration change) and reinitialize properties
+                dialogCancel = parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_CANCELLATION)
+                        as DialogCancellation
+                dialogCancel?.apply {
+                    callbackDialog = { (activity as MainActivity).removeFragmentFromBackStack() }
+                }
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            dialogCancel?.let { this.putBoolean("dialog_cancel", it.showsDialog)}
+        }
+    }
+
+    fun displayCancellationDialog() {
+        dialogCancel = DialogCancellation {
+            (activity as MainActivity).removeFragmentFromBackStack()
+        }
+        dialogCancel?.show(parentFragmentManager, AppConstants.TAG_DIALOG_CANCELLATION)
     }
 }

@@ -12,6 +12,7 @@ import com.homeautomationapp.R
 import com.homeautomationapp.databinding.FragmentUserProfileBinding
 import com.homeautomationapp.model.User
 import com.homeautomationapp.ui.activities.MainActivity
+import com.homeautomationapp.ui.dialogs.DialogCancellation
 import com.homeautomationapp.ui.dialogs.DialogReset
 import com.homeautomationapp.utils.DateFormatter
 import com.homeautomationapp.utils.ProfileTextWatcher
@@ -22,6 +23,10 @@ class UserProfileFragment : Fragment(), FragmentUI {
     private lateinit var binding: FragmentUserProfileBinding
 
     private lateinit var user: User
+
+    private var dialogReset: DialogReset? = null
+
+    private var dialogCancel: DialogCancellation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,10 @@ class UserProfileFragment : Fragment(), FragmentUI {
         handleConfirmationButton()
         binding.textInputEditBirthdate.setOnClickListener {
             displayDatePickerDialog()
+        }
+        savedInstanceState?.let {
+            restoreDialog(it, AppConstants.TAG_DIALOG_RESET)
+            restoreDialog(it, AppConstants.TAG_DIALOG_CANCELLATION)
         }
     }
 
@@ -82,8 +91,7 @@ class UserProfileFragment : Fragment(), FragmentUI {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            android.R.id.home -> { displayCancellationDialog((activity as MainActivity),
-                                                              parentFragmentManager) }
+            android.R.id.home -> { displayCancellationDialog() }
             R.id.clear -> { displayResetDialog() }
         }
         return super.onOptionsItemSelected(item)
@@ -101,10 +109,15 @@ class UserProfileFragment : Fragment(), FragmentUI {
     }
 
     private fun displayResetDialog() {
-       DialogReset {
-           clearTextInputEdits()
-           clearTextInputLayouts()
-       }.show(parentFragmentManager, AppConstants.TAG_DIALOG_RESET)
+       dialogReset = DialogReset {
+           clearFields()
+       }
+       dialogReset?.show(parentFragmentManager, AppConstants.TAG_DIALOG_RESET)
+    }
+
+    private fun clearFields() {
+        clearTextInputEdits()
+        clearTextInputLayouts()
     }
 
     private fun displayDatePickerDialog() {
@@ -272,5 +285,39 @@ class UserProfileFragment : Fragment(), FragmentUI {
             }
             (activity as MainActivity).viewModel.updateUserData(user)
         }
+    }
+
+    private fun restoreDialog(savedInstanceState: Bundle, tag: String) {
+        if (parentFragmentManager.findFragmentByTag(tag) != null) {
+            when(tag) {
+                AppConstants.TAG_DIALOG_RESET -> {
+                    if (savedInstanceState.getBoolean("dialog_reset")) {
+                        dialogReset = parentFragmentManager.findFragmentByTag(tag) as DialogReset
+                        dialogReset?.callbackDialog = { clearFields() }
+                    }
+                }
+                AppConstants.TAG_DIALOG_CANCELLATION -> {
+                    if (savedInstanceState.getBoolean("dialog_cancel")) {
+                        dialogCancel = parentFragmentManager.findFragmentByTag(tag) as DialogCancellation
+                        dialogCancel?.callbackDialog = { (activity as MainActivity).removeFragmentFromBackStack() }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            dialogCancel?.let { this.putBoolean("dialog_cancel", it.showsDialog)}
+            dialogReset?.let { this.putBoolean("dialog_reset", it.showsDialog) }
+        }
+    }
+
+    fun displayCancellationDialog() {
+        dialogCancel = DialogCancellation {
+            (activity as MainActivity).removeFragmentFromBackStack()
+        }
+        dialogCancel?.show(parentFragmentManager, AppConstants.TAG_DIALOG_CANCELLATION)
     }
 }

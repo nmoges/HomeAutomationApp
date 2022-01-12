@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Build
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textview.MaterialTextView
-import com.homeautomationapp.AppConstants
 import com.homeautomationapp.R
 import com.homeautomationapp.ui.activities.MainActivity
-import com.homeautomationapp.ui.dialogs.DialogCancellation
 import com.homeautomationapp.utils.StringModifier
 
 interface FragmentUI {
@@ -81,11 +78,5 @@ interface FragmentUI {
 
     fun displayToastSaveMessage(context: Context?, message: String) {
         context?.let { Toast.makeText(it, message, Toast.LENGTH_SHORT).show() }
-    }
-
-    fun displayCancellationDialog(activity: MainActivity, fragmentManager: FragmentManager) {
-        DialogCancellation {
-            activity.removeFragmentFromBackStack()
-        }.show(fragmentManager, AppConstants.TAG_DIALOG_CANCELLATION)
     }
 }

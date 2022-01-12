@@ -7,7 +7,13 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
-class DialogReset(val callback: () -> Unit) : DialogFragment() {
+class DialogReset() : DialogFragment() {
+
+    lateinit var callbackDialog : () -> (Unit)
+
+    constructor(callback: () -> (Unit)): this() {
+        callbackDialog = callback
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -15,7 +21,7 @@ class DialogReset(val callback: () -> Unit) : DialogFragment() {
                 .setTitle(resources.getString(R.string.title_dialog_reset))
                 .setMessage(resources.getString(R.string.message_dialog_reset))
                 .setPositiveButton(resources.getString(R.string.btn_yes_dialog)) { _, _ ->
-                    callback()
+                    callbackDialog()
                 }
                 .setNegativeButton(resources.getString(R.string.btn_no_dialog)) { _, _ -> }
                 builder.create()
