@@ -1,6 +1,7 @@
 package com.homeautomationapp.repositories
 
 import android.content.Context
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.homeautomationapp.*
 import com.homeautomationapp.database.dao.DeviceDao
 import com.homeautomationapp.database.dao.UserDao
@@ -99,4 +100,54 @@ class Repository(
          }
          return listDevices
      }
+
+    /**
+     * Defines a SQL query to perform filter requests in database.
+     * @param filters : list of filters status
+     */
+    suspend fun getFilteredDevices(filters: BooleanArray): List<Device> {
+        val listDevices: MutableList<Device> = mutableListOf()
+        var query = "SELECT * FROM devices WHERE "
+
+        // Get the list of filters to apply
+        val listFilters = mutableListOf<String>()
+        filters.forEachIndexed { index, status ->
+            if (status) {
+                when (index) {
+                    0 -> { listFilters.add("Light") }
+                    1 -> { listFilters.add("Heater")}
+                    2 -> { listFilters.add("RollerShutter")}
+                }
+            }
+        }
+
+        // Define SQL query
+        var index = 0
+        if (listFilters.size == 0) return listDevices
+        else {
+            while (index < listFilters.size) {
+                query += "devices.product_type = '${listFilters[index]}' "
+                index++
+                if (index < listFilters.size) query += "OR "
+            }
+
+            deviceDao.getFilteredDevicesData(SimpleSQLiteQuery(query)).forEach { deviceData ->
+                when(deviceData.productType) {
+                    "Heater" -> {
+                        val heater = deviceData.toHeater()
+                        listDevices.add(heater)
+                    }
+                    "Light" -> {
+                        val light = deviceData.toLight()
+                        listDevices.add(light)
+                    }
+                    "RollerShutter" -> {
+                        val rollerShutter = deviceData.toShutterRoller()
+                        listDevices.add(rollerShutter)
+                    }
+                }
+            }
+            return listDevices
+        }
+    }
 }

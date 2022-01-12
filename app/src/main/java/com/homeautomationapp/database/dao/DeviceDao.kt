@@ -1,6 +1,7 @@
 package com.homeautomationapp.database.dao
 
 import androidx.room.*
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.homeautomationapp.database.entities.DeviceEntity
 
 /**
@@ -20,4 +21,7 @@ interface DeviceDao {
 
     @Query("SELECT * FROM devices")
     suspend fun getAllDevices(): List<DeviceEntity>
+
+    @RawQuery
+    suspend fun getFilteredDevicesData(query: SimpleSQLiteQuery): List<DeviceEntity>
 }

@@ -16,11 +16,24 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelData @Inject constructor(private val repository: Repository): ViewModel() {
 
+    /**
+      * Contains user information.
+      */
     val userLiveData: MutableLiveData<User> = MutableLiveData()
 
+    /**
+     * Contains list of devices.
+     */
     val devicesLiveData: MutableLiveData<List<Device>> = MutableLiveData()
 
+    /**
+     * Contains filter results of the list of devices.
+     */
+    val devicesFilteredLiveData: MutableLiveData<List<Device>> = MutableLiveData()
+
+
     lateinit var selectedDevice: Device
+
     /**
      * Initializes database at launch.
      */
@@ -62,6 +75,15 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
         viewModelScope.launch {
             repository.deleteDeviceData(device)
             devicesLiveData.postValue(repository.getAllDevices())
+        }
+    }
+
+    fun filterDevices(filters: BooleanArray, isListFiltered: Boolean) {
+        viewModelScope.launch {
+            // If at least one is selected, a query is sent to the database to retrieve results
+            // else the non-filtered list is posted on LiveData
+            if (isListFiltered) devicesFilteredLiveData.postValue(repository.getFilteredDevices(filters))
+            else getListOfDevices()
         }
     }
 }

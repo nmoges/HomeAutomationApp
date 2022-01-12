@@ -33,7 +33,7 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
 
         init {
                 layout.setOnClickListener { onItemClicked(adapterPosition) }
-            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListDevicesViewHolder {
@@ -54,7 +54,7 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
     /**
      * Display device icon.
      * @param icon : icon to display
-     * @param device : type of device
+     * @param type : type of device
      */
     private fun displayIcon(icon: AppCompatImageView, type: String) {
         when(type){
@@ -118,9 +118,7 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
                     text.text = coloredText
                 }
             }
-            "RollerShutter" -> {
-                text.visibility = View.INVISIBLE
-            }
+            "RollerShutter" -> { text.text = "" }
         }
     }
 

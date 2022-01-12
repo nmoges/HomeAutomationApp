@@ -13,13 +13,26 @@ import com.homeautomationapp.databinding.FragmentListDevicesBinding
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.adapters.ListDevicesAdapter
 import com.homeautomationapp.ui.dialogs.DialogFilter
+import com.homeautomationapp.utils.NameDeviceComparator
+import java.util.*
 
 class ListDevicesFragment : Fragment() {
 
     private lateinit var binding: FragmentListDevicesBinding
 
+    /**
+     * Defines a list containing the status of all filters.
+     */
     private val filters: BooleanArray = booleanArrayOf(true, true, true)
 
+    /**
+     * Defines if a filter operation is performed.
+     */
+    private var isListFiltered: Boolean = false
+
+    /**
+     * Defines a dialog to perform a filter operation.
+     */
     private var dialogFilter: DialogFilter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +50,12 @@ class ListDevicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeToolbarForFragment()
         initializeRecyclerView()
-        initializeViewModelObserver()
         savedInstanceState?.let {
-            restoreFiltersValues(it)
+            restoreFilterValues(it)
             restoreDialogFilter(it)
         }
+        initializeObserverListDevices()
+        initializeObserverListDevicesFiltered()
     }
 
     private fun initializeToolbarForFragment() {
@@ -71,6 +85,7 @@ class ListDevicesFragment : Fragment() {
             }
             R.id.filter -> { displayFilterDialog() }
             R.id.manage_devices -> {
+                resetFiltering()
                 (activity as MainActivity).displayFragment(AppConstants.TAG_FRAGMENT_DEVICES_MANAGER)
             }
         }
@@ -82,19 +97,61 @@ class ListDevicesFragment : Fragment() {
         dialogFilter?.show(parentFragmentManager, AppConstants.TAG_DIALOG_FILTER)
     }
 
+    /**
+     * Called when a filter operation is confirmed by user.
+     */
     private fun onDialogFilterChanged() {
-        /* TODO(): Not implemented yet */
+        isListFiltered = !(filters[0] && filters[1] && filters[2])
+        performFiltering()
+    }
+
+    /**
+     * Sends filter parameters values to the view model.
+     */
+    private fun performFiltering() {
+        (activity as MainActivity).viewModel.filterDevices(filters, isListFiltered)
+    }
+
+    /**
+     * Resets all filter parameters.
+     */
+    private fun resetFiltering() {
+        isListFiltered = false
+        filters[0] = true
+        filters[1] = true
+        filters[2] = true
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun initializeViewModelObserver() {
+    private fun initializeObserverListDevices() {
         (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
-            (binding.recyclerView.adapter as ListDevicesAdapter).apply {
-                listDevices.apply {
-                    clear()
-                    addAll(list)
+            // LiveData updates will only be sent to the adapter if no filter operation is performed
+            if (!isListFiltered) {
+                (binding.recyclerView.adapter as ListDevicesAdapter).apply {
+                    listDevices.apply {
+                        Collections.sort(list, NameDeviceComparator)
+                        clear()
+                        addAll(list)
+                    }
+                    notifyDataSetChanged()
                 }
-                notifyDataSetChanged()
+            }
+        })
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initializeObserverListDevicesFiltered() {
+        (activity as MainActivity).viewModel.devicesFilteredLiveData.observe(viewLifecycleOwner, { list ->
+            // LiveData updates will only be sent to the adapter if a filter operation is perform
+            if (isListFiltered) {
+                (binding.recyclerView.adapter as ListDevicesAdapter).apply {
+                    listDevices.apply {
+                        Collections.sort(list, NameDeviceComparator)
+                        clear()
+                        addAll(list)
+                    }
+                    notifyDataSetChanged()
+                }
             }
         })
     }
@@ -109,6 +166,8 @@ class ListDevicesFragment : Fragment() {
     }
 
     private fun onItemClicked(index: Int) {
+        // Filters are cancelled before displaying a new Fragment
+        resetFiltering()
         val device = (binding.recyclerView.adapter as ListDevicesAdapter).listDevices[index]
         (activity as MainActivity).viewModel.selectedDevice = device
         when (device.productType) {
@@ -127,11 +186,13 @@ class ListDevicesFragment : Fragment() {
     /**
      * Restores filters values after a configuration change.
      */
-    private fun restoreFiltersValues(savedInstanceState: Bundle) {
-        savedInstanceState.let { it ->
+    private fun restoreFilterValues(savedInstanceState: Bundle) {
+        savedInstanceState.let {
             filters[0] = it.getBoolean("filter_lights")
             filters[1] = it.getBoolean("filter_heaters")
             filters[2] = it.getBoolean("filter_roller_shutters")
+            isListFiltered = it.getBoolean(("is_list_filtered"))
+            if (isListFiltered) performFiltering()
         }
     }
 
@@ -155,11 +216,11 @@ class ListDevicesFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.apply {
+            this.putBoolean("is_list_filtered", isListFiltered)
             this.putBoolean("filter_lights", filters[0])
             this.putBoolean("filter_heaters", filters[1])
             this.putBoolean("filter_roller_shutters", filters[2])
             dialogFilter?.let { this.putBoolean("dialog_filter_status", it.showsDialog) }
         }
-
     }
 }
