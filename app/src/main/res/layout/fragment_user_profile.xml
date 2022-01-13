@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.UserProfileFragment"
-    android:background="@color/dark_blue_18pr">
+    android:background="@color/dark_blue_18pr"
+    android:id="@+id/fragment_user_device">
 
     <ScrollView
         android:layout_width="match_parent"

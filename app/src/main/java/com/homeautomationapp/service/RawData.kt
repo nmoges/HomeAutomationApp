@@ -5,5 +5,5 @@ package com.homeautomationapp.service
  */
 data class RawData(
     val devices: List<RawDevice>,
-    val user: RawUser
+    val user: RawUser,
 )

@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ManagerFragment"
-    android:background="@color/dark_blue_18pr">
+    android:background="@color/dark_blue_18pr"
+    android:id="@+id/fragment_devices_manager">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_manager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

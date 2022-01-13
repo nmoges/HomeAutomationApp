@@ -60,7 +60,7 @@ class ManagerFragment : Fragment() {
     }
 
     private fun initializeRecyclerView() {
-        binding.recyclerView.apply {
+        binding.recyclerViewManager.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = ManagerAdapter { index -> displayDialog(index) }
@@ -70,7 +70,7 @@ class ManagerFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initializeViewModelObserver() {
         (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
-            (binding.recyclerView.adapter as ManagerAdapter).apply {
+            (binding.recyclerViewManager.adapter as ManagerAdapter).apply {
                 listDevices.apply {
                     clear()
                     Collections.sort(list, NameDeviceComparator)
@@ -123,7 +123,7 @@ class ManagerFragment : Fragment() {
      * Delete selected device in database.
      */
     private fun deleteDevice(index: Int) {
-        val device = (binding.recyclerView.adapter as ManagerAdapter).listDevices[index]
+        val device = (binding.recyclerViewManager.adapter as ManagerAdapter).listDevices[index]
         (activity as MainActivity).viewModel.deleteDevice(device)
         Toast.makeText(context,
                        resources.getString(R.string.toast_deleted_device),

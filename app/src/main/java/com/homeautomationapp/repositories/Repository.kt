@@ -1,8 +1,9 @@
 package com.homeautomationapp.repositories
 
 import android.content.Context
+import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.homeautomationapp.*
 import com.homeautomationapp.database.dao.DeviceDao
 import com.homeautomationapp.database.dao.UserDao
 import com.homeautomationapp.database.entities.DeviceEntity
@@ -10,6 +11,7 @@ import com.homeautomationapp.database.entities.UserEntity
 import com.homeautomationapp.model.Device
 import com.homeautomationapp.model.User
 import com.homeautomationapp.service.FakeDevicesService
+import com.homeautomationapp.utils.*
 
 /**
  * Defines a database repository access.
@@ -24,6 +26,8 @@ class Repository(
     suspend fun initializeDbWithJSONData(context: Context) {
         val rawData = FakeDevicesService.getRawDataFromJsonFile(context)
 
+        Log.i("BIRTHDATE", "${rawData.user.birthDate}")
+
         // Insert data in "user" table
         insertUserData(rawData.user.toUserEntity())
 
@@ -33,8 +37,8 @@ class Repository(
         }
     }
 
-    private suspend fun insertUserData(userEntity: UserEntity) {
-         userDao.insertUserData(userEntity)
+    suspend fun insertUserData(userEntity: UserEntity): Long {
+         return userDao.insertUserData(userEntity)
     }
 
      suspend fun updateUserData(user: User) {
@@ -45,8 +49,8 @@ class Repository(
          return userDao.getUserData().toUser()
      }
 
-     private suspend fun insertDeviceData(deviceEntity: DeviceEntity) {
-         deviceDao.insertDeviceData(deviceEntity)
+    suspend fun insertDeviceData(deviceEntity: DeviceEntity): Long {
+         return deviceDao.insertDeviceData(deviceEntity)
      }
 
      suspend fun updateDeviceData(device: Device) {
@@ -150,4 +154,7 @@ class Repository(
             return listDevices
         }
     }
+
+    @VisibleForTesting
+    suspend fun getDeviceById(id: Long): DeviceEntity =  deviceDao.getDeviceById(id)
 }

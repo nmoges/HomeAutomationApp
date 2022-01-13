@@ -127,7 +127,7 @@ class ListDevicesFragment : Fragment() {
         (activity as MainActivity).viewModel.devicesLiveData.observe(viewLifecycleOwner, { list ->
             // LiveData updates will only be sent to the adapter if no filter operation is performed
             if (!isListFiltered) {
-                (binding.recyclerView.adapter as ListDevicesAdapter).apply {
+                (binding.recyclerViewListDevices.adapter as ListDevicesAdapter).apply {
                     listDevices.apply {
                         Collections.sort(list, NameDeviceComparator)
                         clear()
@@ -144,7 +144,7 @@ class ListDevicesFragment : Fragment() {
         (activity as MainActivity).viewModel.devicesFilteredLiveData.observe(viewLifecycleOwner, { list ->
             // LiveData updates will only be sent to the adapter if a filter operation is perform
             if (isListFiltered) {
-                (binding.recyclerView.adapter as ListDevicesAdapter).apply {
+                (binding.recyclerViewListDevices.adapter as ListDevicesAdapter).apply {
                     listDevices.apply {
                         Collections.sort(list, NameDeviceComparator)
                         clear()
@@ -158,7 +158,7 @@ class ListDevicesFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initializeRecyclerView() {
-        binding.recyclerView.apply {
+        binding.recyclerViewListDevices.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = ListDevicesAdapter(context) { position -> onItemClicked(position) }
@@ -168,7 +168,7 @@ class ListDevicesFragment : Fragment() {
     private fun onItemClicked(index: Int) {
         // Filters are cancelled before displaying a new Fragment
         resetFiltering()
-        val device = (binding.recyclerView.adapter as ListDevicesAdapter).listDevices[index]
+        val device = (binding.recyclerViewListDevices.adapter as ListDevicesAdapter).listDevices[index]
         (activity as MainActivity).viewModel.selectedDevice = device
         when (device.productType) {
             "Heater" -> {

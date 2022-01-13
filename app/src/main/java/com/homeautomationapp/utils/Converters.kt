@@ -1,4 +1,4 @@
-package com.homeautomationapp
+package com.homeautomationapp.utils
 
 import com.homeautomationapp.database.entities.DeviceEntity
 import com.homeautomationapp.database.entities.UserEntity
@@ -7,6 +7,7 @@ import com.homeautomationapp.model.Device
 import com.homeautomationapp.model.User
 import com.homeautomationapp.service.RawDevice
 import com.homeautomationapp.service.RawUser
+import java.text.DateFormat
 
 fun DeviceEntity.toHeater() = Device.Heater(
     id = this.id,
@@ -70,6 +71,7 @@ fun UserEntity.toUser(): User {
         country = this.country
     )
     return User(
+        id = this.id,
         firstName = this.firstName,
         lastName = this.lastName,
         birthdate = this.birthdate,
@@ -96,7 +98,7 @@ fun User.toUserEntity() = UserEntity(
 fun RawUser.toUserEntity() = UserEntity(
     firstName = this.firstName,
     lastName = this.lastName,
-    birthdate = "",
+    birthdate = DateFormat.getInstance().format(this.birthDate).substringBefore(" "),
     email = "",
     phone = "",
     streetNumber = this.address.streetCode,

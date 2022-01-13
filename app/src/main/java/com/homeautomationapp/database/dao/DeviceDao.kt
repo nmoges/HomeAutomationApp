@@ -1,5 +1,6 @@
 package com.homeautomationapp.database.dao
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.*
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.homeautomationapp.database.entities.DeviceEntity
@@ -11,7 +12,7 @@ import com.homeautomationapp.database.entities.DeviceEntity
 interface DeviceDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDeviceData(deviceEntity: DeviceEntity)
+    suspend fun insertDeviceData(deviceEntity: DeviceEntity): Long
 
     @Update
     suspend fun updateDeviceData(deviceEntity: DeviceEntity)
@@ -24,4 +25,8 @@ interface DeviceDao {
 
     @RawQuery
     suspend fun getFilteredDevicesData(query: SimpleSQLiteQuery): List<DeviceEntity>
+
+    @VisibleForTesting
+    @Query("SELECT * FROM devices WHERE id = :id")
+    suspend fun getDeviceById(id: Long): DeviceEntity
 }

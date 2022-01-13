@@ -44,7 +44,7 @@
     <string name="toast_deleted_device">Appareil supprimé</string>
 
     <!-- RollerShuttersFragment.kt -->
-    <string name="name_toolbar_frg_roller_shutters">Volet</string>
+    <string name="name_toolbar_frg_roller_shutters">Volet électrique</string>
 
     <!-- UserProfileFragment.kt -->
     <string name="name_toolbar_frg_user_profile">Profil</string>

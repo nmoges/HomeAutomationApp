@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="devices">
+        <item>Lumières</item>
+        <item>Radiateurs</item>
+        <item>Volets électriques</item>
+    </string-array>
+</resources>

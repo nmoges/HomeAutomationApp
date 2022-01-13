@@ -7,7 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.RollerShuttersFragment"
     android:background="@color/dark_blue_18pr"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/fragment_roller_shutters">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

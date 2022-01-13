@@ -13,10 +13,10 @@ object FakeDevicesService {
 
     fun getRawDataFromJsonFile(context: Context): RawData {
         val type = object : TypeToken<RawData>() {}.type
-        return Gson().fromJson(getJsonDataFromFile(context, "data.json"), type)
+        return Gson().fromJson(getJsonDataFromFile(context), type)
     }
 
-    private fun getJsonDataFromFile(context: Context, fileName: String): String? {
+    private fun getJsonDataFromFile(context: Context, fileName: String = "data.json"): String? {
         val jsonData: String
         try {
             jsonData = context.assets.open(fileName).bufferedReader().use { it.readText() }

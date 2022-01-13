@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * View model containing user and list of devices LiveData.
+ */
 @HiltViewModel
 class ViewModelData @Inject constructor(private val repository: Repository): ViewModel() {
 
