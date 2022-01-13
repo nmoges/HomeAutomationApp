@@ -13,6 +13,9 @@ import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.dialogs.DialogCancellation
 
+/**
+ * Fragment displaying a heater device information.
+ */
 class HeatersFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentHeatersBinding
@@ -94,10 +97,16 @@ class HeatersFragment : Fragment(), FragmentUI {
         }
     }
 
+    /**
+     * Get heater device stored in view model.
+     */
     private fun getSelectedHeaterDevice() {
         heater = (activity as MainActivity).viewModel.selectedDevice as Device.Heater
     }
 
+    /**
+     * Sends heater updates parameters to view model for database storage.
+     */
     private fun saveNewHeaterValues() {
         heater.apply {
             mode = if (binding.switchStatus.isChecked) "ON" else "OFF"
@@ -106,6 +115,9 @@ class HeatersFragment : Fragment(), FragmentUI {
         (activity as MainActivity).viewModel.updateDevice(heater)
     }
 
+    /**
+     * Allows dialog display restoration after a configuration change.
+     */
     private fun restoreDialogCancellation(savedInstanceState: Bundle) {
         if (savedInstanceState.getBoolean("dialog_cancel")) {
             if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_CANCELLATION) != null) {

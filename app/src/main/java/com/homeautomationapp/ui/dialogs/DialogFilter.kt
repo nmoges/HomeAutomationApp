@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 
+/**
+ * Displays a filer dialog for user.
+ */
 class DialogFilter(): DialogFragment() {
 
     var arrayDialog: BooleanArray = booleanArrayOf(true, true, true)

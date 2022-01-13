@@ -20,7 +20,9 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): HomeAutomationDb {
-        return Room.databaseBuilder(context, HomeAutomationDb::class.java, "home_automation_app_database")
+        return Room.databaseBuilder(context,
+                                    HomeAutomationDb::class.java,
+                                    "home_automation_app_database")
             .fallbackToDestructiveMigration().build()
     }
 

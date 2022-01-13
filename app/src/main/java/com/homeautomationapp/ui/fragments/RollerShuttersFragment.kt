@@ -13,6 +13,9 @@ import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.dialogs.DialogCancellation
 
+/**
+ * Fragment displaying a roller shutter device information.
+ */
 class RollerShuttersFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentRollerShuttersBinding
@@ -77,10 +80,16 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
         }
     }
 
+    /**
+     * Get roller shutter device stored in view model.
+     */
     private fun getSelectedRollerShutterDevice() {
         rollerShutter = (activity as MainActivity).viewModel.selectedDevice as Device.RollerShutter
     }
 
+    /**
+     * Sends roller shutter updates parameters to view model for database storage.
+     */
     private fun saveNewRollerShutterValues() {
         rollerShutter.apply {
             position = binding.slider.values[0].toInt()
@@ -88,6 +97,9 @@ class RollerShuttersFragment : Fragment(), FragmentUI {
         (activity as MainActivity).viewModel.updateDevice(rollerShutter)
     }
 
+    /**
+     * Allows dialog display restoration after a configuration change.
+     */
     private fun restoreDialogCancellation(savedInstanceState: Bundle) {
         if (savedInstanceState.getBoolean("dialog_cancel")) {
             if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_CANCELLATION) != null) {

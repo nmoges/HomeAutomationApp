@@ -3,8 +3,7 @@
 
     <!-- DIALOGS -->
     <!-- DialogCancellation.kt -->
-    <string name="title_dialog_cancellation">Annuler</string>
-    <string name="message_dialog_cancellation">Les modification vont être annulées. Confirmer ?</string>
+    <string name="title_dialog_cancellation">Annuler les modifications</string>
 
     <!-- DialogDelete.kt -->
     <string name="title_dialog_delete">Supprimer appareil</string>

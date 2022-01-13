@@ -81,6 +81,9 @@ class ViewModelData @Inject constructor(private val repository: Repository): Vie
         }
     }
 
+    /**
+     * Sends filter information to the repository
+     */
     fun filterDevices(filters: BooleanArray, isListFiltered: Boolean) {
         viewModelScope.launch {
             // If at least one is selected, a query is sent to the database to retrieve results

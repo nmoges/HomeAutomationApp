@@ -11,11 +11,21 @@ import java.io.IOException
  */
 object FakeDevicesService {
 
+    /**
+     * Converts JSON data into [RawData] object
+     * @param context : application context.
+     */
     fun getRawDataFromJsonFile(context: Context): RawData {
         val type = object : TypeToken<RawData>() {}.type
         return Gson().fromJson(getJsonDataFromFile(context), type)
     }
 
+    /**
+     * Extracts data from a JSON file.
+     * @param context : application context
+     * @param fileName : name of the .json file
+     * @return : json data
+     */
     private fun getJsonDataFromFile(context: Context, fileName: String = "data.json"): String? {
         val jsonData: String
         try {

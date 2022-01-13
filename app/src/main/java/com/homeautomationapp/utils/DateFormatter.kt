@@ -1,5 +1,8 @@
 package com.homeautomationapp.utils
 
+/**
+ * Provides a formatted date.
+ */
 object DateFormatter {
 
     fun getDate(year: Int, month: Int, day: Int): String {

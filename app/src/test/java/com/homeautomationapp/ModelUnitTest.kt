@@ -93,13 +93,13 @@ class ModelUnitTest {
             id = 1,
             deviceName = "Lampe - Salle de bain",
             productType = "Light",
-            luminosity = 36,
+            intensity = 36,
             mode = "ON",
         )
         assertEquals(1, light.id)
         assertEquals("Lampe - Salle de bain", light.deviceName)
         assertEquals("Light", light.productType)
-        assertEquals(36, light.luminosity)
+        assertEquals(36, light.intensity)
         assertEquals("ON", light.mode)
     }
 

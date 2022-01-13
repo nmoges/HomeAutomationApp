@@ -116,6 +116,6 @@ class DatabaseInstrumentedTest {
                     email = "johndoe@gmail.com", phone = "0606060606", address = address)
 
         light = Device.Light(id = 1, deviceName = "Lampe - Cuisine", productType = "Light",
-                             luminosity = 50, mode = "ON")
+                             intensity = 50, mode = "ON")
     }
 }

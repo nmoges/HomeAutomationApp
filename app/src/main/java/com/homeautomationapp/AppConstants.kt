@@ -1,5 +1,8 @@
 package com.homeautomationapp
 
+/**
+ * Defines application constants.
+ */
 object AppConstants {
     const val TAG_FRAGMENT_HEATERS = "TAG_FRAGMENT_HEATERS"
     const val TAG_FRAGMENT_LIGHTS = "TAG_FRAGMENT_LIGHTS"

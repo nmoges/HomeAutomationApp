@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
+/**
+ * Displays a delete message for user.
+ */
 class DialogDelete() : DialogFragment() {
 
     var indexDialog : Int = 0

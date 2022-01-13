@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Initializes fragments navigation.
+     */
     private fun initializeNavigation() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_frg)
                           as NavHostFragment
@@ -64,6 +67,11 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setTitleTextColor(color)
     }
 
+    /**
+     * Updates main activity toolbar according to which child fragment is displayed.
+     * @param title : associated fragment title
+     * @param backIconDisplay : back icon display status
+     */
     fun setToolbarProperties(title: String, backIconDisplay: Boolean) {
         supportActionBar?.apply {
             setTitle(title)
@@ -75,6 +83,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Navigates in the navigation graph to the selected fragment.
+     * @param tag : associated tag fragment
+     */
     fun displayFragment(tag: String) {
         when(tag) {
             AppConstants.TAG_FRAGMENT_USER_PROFILE ->  {

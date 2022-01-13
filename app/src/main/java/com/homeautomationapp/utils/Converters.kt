@@ -21,7 +21,7 @@ fun DeviceEntity.toLight() = Device.Light(
     id = this.id,
     deviceName = this.name,
     productType = this.productType,
-    luminosity = this.intensity,
+    intensity = this.intensity,
     mode = this.mode
 )
 
@@ -45,7 +45,7 @@ fun Device.Heater.toDeviceEntity() = DeviceEntity(
 fun Device.Light.toDeviceEntity() = DeviceEntity(
     id = this.id,
     name = this.deviceName,
-    intensity = this.luminosity,
+    intensity = this.intensity,
     mode = this.mode,
     position = null,
     productType = this.productType,

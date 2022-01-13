@@ -11,6 +11,13 @@ import com.homeautomationapp.R
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.utils.StringModifier
 
+/**
+ * interface implemented in fragments :
+ *          - HeatersFragment
+ *          - LightsFragment
+ *          - RollerShuttersFragment
+ *          - UserProfileFragment
+ */
 interface FragmentUI {
 
     fun initializeToolbarForFragment(activity: MainActivity, title: String) {
@@ -46,22 +53,28 @@ interface FragmentUI {
         slider.apply {
             if (status) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    this.trackActiveTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_72pr, null))
-                    this.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_72pr, null))
+                    this.trackActiveTintList =
+                           ColorStateList.valueOf(resources.getColor(R.color.blue_72pr, null))
+                    this.thumbTintList =
+                           ColorStateList.valueOf(resources.getColor(R.color.blue_72pr, null))
                 }
                 else {
-                    this.trackActiveTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_72pr))
+                    this.trackActiveTintList =
+                                       ColorStateList.valueOf(resources.getColor(R.color.blue_72pr))
                     this.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_72pr))
                 }
 
             }
             else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    this.trackActiveTintList = ColorStateList.valueOf(resources.getColor(R.color.grey_85pr, null))
-                    this.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.grey_85pr, null))
+                    this.trackActiveTintList =
+                           ColorStateList.valueOf(resources.getColor(R.color.grey_85pr, null))
+                    this.thumbTintList =
+                           ColorStateList.valueOf(resources.getColor(R.color.grey_85pr, null))
                 }
                 else {
-                    this.trackActiveTintList = ColorStateList.valueOf(resources.getColor(R.color.grey_85pr))
+                    this.trackActiveTintList =
+                                       ColorStateList.valueOf(resources.getColor(R.color.grey_85pr))
                     this.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.grey_85pr))
                 }
             }

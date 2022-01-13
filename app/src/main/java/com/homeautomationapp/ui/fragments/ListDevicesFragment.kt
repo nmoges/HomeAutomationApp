@@ -16,6 +16,9 @@ import com.homeautomationapp.ui.dialogs.DialogFilter
 import com.homeautomationapp.utils.NameDeviceComparator
 import java.util.*
 
+/**
+ * Fragment displaying the list of existing devices.
+ */
 class ListDevicesFragment : Fragment() {
 
     private lateinit var binding: FragmentListDevicesBinding

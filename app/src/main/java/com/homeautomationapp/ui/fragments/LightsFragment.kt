@@ -13,6 +13,9 @@ import com.homeautomationapp.model.Device
 import com.homeautomationapp.ui.activities.MainActivity
 import com.homeautomationapp.ui.dialogs.DialogCancellation
 
+/**
+ * Fragment displaying a light device information.
+ */
 class LightsFragment : Fragment(), FragmentUI {
 
     private lateinit var binding: FragmentLightsBinding
@@ -51,7 +54,7 @@ class LightsFragment : Fragment(), FragmentUI {
     private fun handleSwitchListener() {
         binding.switchStatus.setOnCheckedChangeListener { _, status ->
             updateSliderStatus(status, binding.slider)
-            updateMaterialTextViewBackgroundColor(status, binding.currentLuminosity)
+            updateMaterialTextViewBackgroundColor(status, binding.currentIntensity)
             updateMaterialTextViewDeviceStatus(status, binding.statusOnOff)
         }
     }
@@ -63,7 +66,7 @@ class LightsFragment : Fragment(), FragmentUI {
     }
 
     private fun updateMaterialTextViewSelectedLuminosity(luminosity: String) {
-        binding.currentLuminosity.text = luminosity
+        binding.currentIntensity.text = luminosity
     }
 
     /**
@@ -75,14 +78,14 @@ class LightsFragment : Fragment(), FragmentUI {
         binding.slider.apply {
             this.isEnabled = status
             updateSliderActiveColor(status, this)
-            light.luminosity?.let { this.setValues(it.toFloat()) }
+            light.intensity?.let { this.setValues(it.toFloat()) }
         }
         // Switch
         binding.switchStatus.isChecked = status
         // MaterialTexts
         updateMaterialTextViewDeviceStatus(status, binding.statusOnOff)
-        updateMaterialTextViewBackgroundColor(status, binding.currentLuminosity)
-        light.luminosity?.let { updateMaterialTextViewSelectedLuminosity(it.toString()) }
+        updateMaterialTextViewBackgroundColor(status, binding.currentIntensity)
+        light.intensity?.let { updateMaterialTextViewSelectedLuminosity(it.toString()) }
     }
 
     private fun handleSaveButtonListener() {
@@ -93,18 +96,27 @@ class LightsFragment : Fragment(), FragmentUI {
         }
     }
 
+    /**
+     * Get light device stored in view model.
+     */
     private fun getSelectedLightDevice() {
         light = (activity as MainActivity).viewModel.selectedDevice as Device.Light
     }
 
+    /**
+     * Sends light updates parameters to view model for database storage.
+     */
     private fun saveNewLightValues() {
         light.apply {
             mode = if (binding.switchStatus.isChecked) "ON" else "OFF"
-            luminosity = binding.slider.values[0].toInt()
+            intensity = binding.slider.values[0].toInt()
         }
         (activity as MainActivity).viewModel.updateDevice(light)
     }
 
+    /**
+     * Allows dialog display restoration after a configuration change.
+     */
     private fun restoreDialogCancellation(savedInstanceState: Bundle) {
         if (savedInstanceState.getBoolean("dialog_cancel")) {
             if (parentFragmentManager.findFragmentByTag(AppConstants.TAG_DIALOG_CANCELLATION) != null) {

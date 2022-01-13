@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
+/**
+ * Displays a cancellation message for user.
+ */
 class DialogCancellation() : DialogFragment() {
 
     lateinit var callbackDialog: () -> (Unit)
@@ -19,7 +22,6 @@ class DialogCancellation() : DialogFragment() {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
                 .setTitle(resources.getString(R.string.title_dialog_cancellation))
-                .setMessage(resources.getString(R.string.message_dialog_cancellation))
                 .setPositiveButton(resources.getString(R.string.btn_yes_dialog)) { _, _ ->
                     callbackDialog()
                 }

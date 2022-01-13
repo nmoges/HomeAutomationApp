@@ -88,8 +88,8 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
                 text.text = temperature
             }
             "Light" -> {
-                val luminosity = (device as Device.Light).luminosity.toString()
-                text.text = luminosity
+                val intensity = (device as Device.Light).intensity.toString()
+                text.text = intensity
             }
             "RollerShutter" -> {
                 val position = (device as Device.RollerShutter).position.toString()

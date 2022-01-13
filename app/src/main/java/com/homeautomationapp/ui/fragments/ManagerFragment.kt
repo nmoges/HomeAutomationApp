@@ -18,6 +18,9 @@ import com.homeautomationapp.ui.dialogs.DialogDelete
 import com.homeautomationapp.utils.NameDeviceComparator
 import java.util.*
 
+/**
+ * Fragment displaying the list of existing devices that user can delete.
+ */
 class ManagerFragment : Fragment() {
 
     private lateinit var binding: FragmentDevicesManagerBinding

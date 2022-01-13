@@ -13,13 +13,9 @@
     <color name="blue_72pr">#729EFF</color>
     <color name="blue_63pr">#5F69E0</color>
     <color name="blue_64pr">#5C47FF</color>
-    <color name="color1">#5f6380</color>
-    <color name="color2">#4e526b</color>
-    <color name="color3">#393b50</color>
     <color name="grey_85pr">#d9d9d9</color>
     <color name="grey_50pr">#808080</color>
     <color name="grey_40pr">#666666</color>
-
     <color name="red">#FF1A1A</color>
     <color name="green">#05FCA4</color>
 </resources>

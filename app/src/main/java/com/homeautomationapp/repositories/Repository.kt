@@ -1,7 +1,6 @@
 package com.homeautomationapp.repositories
 
 import android.content.Context
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.homeautomationapp.database.dao.DeviceDao
@@ -14,7 +13,7 @@ import com.homeautomationapp.service.FakeDevicesService
 import com.homeautomationapp.utils.*
 
 /**
- * Defines a database repository access.
+ * Defines a repository for database access.
  */
 class Repository(
     private val userDao: UserDao,
@@ -25,8 +24,6 @@ class Repository(
      */
     suspend fun initializeDbWithJSONData(context: Context) {
         val rawData = FakeDevicesService.getRawDataFromJsonFile(context)
-
-        Log.i("BIRTHDATE", "${rawData.user.birthDate}")
 
         // Insert data in "user" table
         insertUserData(rawData.user.toUserEntity())

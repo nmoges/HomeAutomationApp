@@ -3,6 +3,6 @@
     <string-array name="devices">
         <item>Lumières</item>
         <item>Radiateurs</item>
-        <item>Volets électriques</item>
+        <item>Volets roulants</item>
     </string-array>
 </resources>

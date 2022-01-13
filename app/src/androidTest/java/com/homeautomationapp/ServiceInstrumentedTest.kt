@@ -12,7 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * Instrumentation test for fragments UI.
+ * Instrumentation test for FakeDevicesService class.
  * Performed on emulator Pixel 3a XL API 30 :
  *              - Resolution : 1080 x 2160: 400dpi
  *              - API 30
@@ -27,7 +27,7 @@ class ServiceInstrumentedTest {
     @get: Rule(order = 1)
     var mMainActivityRule = ActivityTestRule(MainActivity::class.java)
 
-    lateinit var mainActivity: MainActivity
+    private lateinit var mainActivity: MainActivity
 
     @Before
     fun setUp() {

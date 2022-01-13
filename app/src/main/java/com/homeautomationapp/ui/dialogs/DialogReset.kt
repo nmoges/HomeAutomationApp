@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment
 import com.homeautomationapp.R
 import java.lang.IllegalStateException
 
+/**
+ * Displays a reset message for user.
+ */
 class DialogReset() : DialogFragment() {
 
     lateinit var callbackDialog : () -> (Unit)

@@ -56,6 +56,9 @@ class UserProfileFragment : Fragment(), FragmentUI {
         }
     }
 
+    /**
+     * Displays selected date from DatePickerDialog in associated TextInputEditText.
+     */
     private fun displayDate(year: Int, month: Int, day: Int) {
         binding.textInputEditBirthdate.setText(DateFormatter.getDate(year, month, day))
     }
@@ -115,11 +118,17 @@ class UserProfileFragment : Fragment(), FragmentUI {
        dialogReset?.show(parentFragmentManager, AppConstants.TAG_DIALOG_RESET)
     }
 
+    /**
+     * Restore initial views status.
+     */
     private fun clearFields() {
         clearTextInputEdits()
         clearTextInputLayouts()
     }
 
+    /**
+     * Display a DatePicker dialog allowing user to select a date.
+     */
     private fun displayDatePickerDialog() {
         val calendar = Calendar.getInstance()
         DatePickerDialog((activity as MainActivity),
@@ -208,6 +217,9 @@ class UserProfileFragment : Fragment(), FragmentUI {
 
     private fun isEmailFormatIsValid(email: String): Boolean = email.contains("@")
 
+    /**
+     * Initializes all TextInputEditText with a ProfileTextWatcher to catch every change event.
+     */
     private fun handleTextInputEditListeners() {
         binding.let {
             it.textInputEditFirstName.addTextChangedListener(ProfileTextWatcher("first_name")
@@ -269,6 +281,9 @@ class UserProfileFragment : Fragment(), FragmentUI {
                        Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Sends user profile new information to view model for database update.
+     */
     private fun saveNewUserInformation() {
         binding.let {
             user.apply {

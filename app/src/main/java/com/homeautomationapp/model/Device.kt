@@ -21,6 +21,6 @@ sealed class Device(val id: Int = 1, val deviceName: String, val productType: St
         id: Int,
         deviceName: String,
         productType: String,
-        var luminosity: Int?,
+        var intensity: Int?,
         var mode: String?): Device(id, deviceName, productType)
 }

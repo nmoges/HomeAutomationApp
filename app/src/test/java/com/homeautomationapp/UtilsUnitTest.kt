@@ -31,7 +31,7 @@ class UtilsUnitTest {
     @Test
     fun test_name_device_comparator() {
         val light = Device.Light(id = 1, deviceName = "Lampe - Cuisine", productType = "Light",
-                                 luminosity = 50, mode = "ON")
+                                 intensity = 50, mode = "ON")
 
         val heater = Device.Heater(id = 1, deviceName = "Radiateur - Chambre", productType = "Heater",
                                   temperature = 20, mode = "ON")
@@ -96,7 +96,7 @@ class UtilsUnitTest {
         assertEquals(10, light.id)
         assertEquals("Lampe - Salle de bain", light.deviceName)
         assertEquals("ON", light.mode)
-        assertEquals(36, light.luminosity)
+        assertEquals(36, light.intensity)
         assertEquals("Light", light.productType)
 
         // Device.Light.toDeviceEntity()
