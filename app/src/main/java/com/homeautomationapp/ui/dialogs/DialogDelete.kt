@@ -12,7 +12,7 @@ import java.lang.IllegalStateException
  */
 class DialogDelete() : DialogFragment() {
 
-    var indexDialog : Int = 0
+    private var indexDialog : Int = 0
     lateinit var callbackDialog: (Int) -> (Unit)
     constructor(index: Int, callback: (Int) -> Unit): this() {
         indexDialog = index

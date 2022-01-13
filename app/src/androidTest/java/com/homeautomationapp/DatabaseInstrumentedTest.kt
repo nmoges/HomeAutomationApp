@@ -34,8 +34,8 @@ class DatabaseInstrumentedTest {
     @Inject lateinit var database: HomeAutomationDb
     @Inject lateinit var repository: Repository
 
-    lateinit var user: User
-    lateinit var light: Device.Light
+    private lateinit var user: User
+    private lateinit var light: Device.Light
 
     @Before
     fun setUp() {

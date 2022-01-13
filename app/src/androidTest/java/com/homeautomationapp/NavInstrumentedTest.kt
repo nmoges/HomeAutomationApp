@@ -32,7 +32,7 @@ class NavInstrumentedTest {
     @get: Rule(order = 1)
     var mMainActivityRule = ActivityTestRule(MainActivity::class.java)
 
-    lateinit var mainActivity: MainActivity
+    private lateinit var mainActivity: MainActivity
 
     @Before
     fun setUp() {

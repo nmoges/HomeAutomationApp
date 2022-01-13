@@ -29,7 +29,7 @@ class ListDevicesAdapter(private val context: Context, private val onItemClicked
             var name: MaterialTextView = view.findViewById(R.id.name_device)
             var value: MaterialTextView = view.findViewById(R.id.value_device)
             var status: MaterialTextView = view.findViewById(R.id.status_device)
-            var layout: ConstraintLayout = view.findViewById(R.id.constraint_layout_item)
+            private var layout: ConstraintLayout = view.findViewById(R.id.constraint_layout_item)
 
         init {
                 layout.setOnClickListener { onItemClicked(adapterPosition) }

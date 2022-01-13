@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
     private lateinit var navHostFragment: NavHostFragment
 
@@ -38,9 +38,7 @@ class MainActivity : AppCompatActivity() {
         initializeToolbar()
         initializeNavigation()
         initializeViewModel()
-        viewModel.let {
-            it.initializeDB(applicationContext)
-        }
+        viewModel.initializeDB(applicationContext)
     }
 
     /**

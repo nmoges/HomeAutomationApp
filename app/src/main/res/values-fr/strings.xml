@@ -103,4 +103,11 @@
     <string name="frg_roller_shutters_label">RollerShuttersFragment</string>
     <string name="frg_user_profile_label">UserProfileFragment</string>
     <string name="frg_devices_manager">DevicesManagerFragment</string>
+
+
+    <!-- RECYCLER VIEW -->
+    <!-- item_device.xml -->
+    <string name="name_item">Nom appareil</string>
+    <string name="value_item">15°C</string>
+    <string name="mode_item">ON</string>
 </resources>
